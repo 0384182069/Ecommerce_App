@@ -43,7 +43,7 @@ class _MyTextfieldState extends State<MyTextfield> {
                       _isObsure = !_isObsure;
                     });
                   },
-                ): null,
+                ): const SizedBox.shrink(),
                 ),
               ),
             );
