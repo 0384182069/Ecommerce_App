@@ -40,9 +40,9 @@ class _LoginState extends State<Login> {
                 margin: EdgeInsets.only(top: MediaQuery.of(context).size.height/3),
                 height: MediaQuery.of(context).size.height,
                 width: MediaQuery.of(context).size.width,
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
+                decoration: BoxDecoration(
+                  color: Colors.grey[200],
+                  borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(40),
                     topRight: Radius.circular(40)
                 )),
@@ -83,7 +83,7 @@ class _LoginState extends State<Login> {
                         Container(
                           padding: const EdgeInsets.only(right: 20),
                           alignment: Alignment.topRight,
-                          child: Text("Forget Password?",style: FontSize.semiBoldTextFeilStyle(),),
+                          child: Text("Forget Password?",style: FontSize.lightTextFeilStyle(),),
                         ),
                         const SizedBox(height: 60,),
                         Material(
@@ -111,20 +111,78 @@ class _LoginState extends State<Login> {
                 ),
                 
               ),
-              const Positioned(
-                bottom: 350,
+              Positioned(
+                bottom: 340,
                 left: 0,
                 right: 0,
-                child: Center(
-                    child: Text(
-                      "Don't have an account? Sign up",
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontFamily: "Poppins",
-                        fontWeight: FontWeight.bold,
+                child: Column(
+                  children: [
+                  const Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                    Text("Or continue with", style: TextStyle(
+                      color: Colors.black38,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                      fontFamily: "Poppins",
                       ),
+                    )
+                  ],),
+                  const SizedBox(height: 30,),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Material(
+                        borderRadius: BorderRadius.circular(10),
+                        elevation: 5,
+                        child: Container(
+                          padding: const EdgeInsets.only(top:10, left:10, right:10, bottom: 10,),
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.black,),
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.white,
+                          ),
+                          height: 60,
+                          child: Image.asset("images/google.png"),
+                        ),
+                      ),
+                      const SizedBox(width: 20,),
+                      Material(
+                        borderRadius: BorderRadius.circular(10),
+                        elevation: 5,
+                        child: Container(
+                          padding: const EdgeInsets.only(top:10, left:10, right:10, bottom: 10,),
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.black,),
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.white,
+                          ),
+                          height: 60,
+                          child: Image.asset("images/apple.png"),
+                        ),
+                      ),
+                  ],),
+                  const SizedBox(height: 30,),
+                  const Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                    Text("Not a memmber?", style: TextStyle(
+                      color: Colors.black38,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                      fontFamily: "Poppins",
+                      )
                     ),
-                ),
+                    SizedBox(width: 5,),
+                    Text("Register now", style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: "Poppins",
+                      color: Colors.blue,
+                    )
+                    ),
+                  ],),
+                ],),
               ),
             ],
           ),
