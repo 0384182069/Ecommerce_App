@@ -1,4 +1,4 @@
-import 'package:ecommerce_app/widget/widget_font.dart';
+import 'package:ecommerce_app/components/FontSize.dart';
 import 'package:flutter/material.dart';
 
 class Details extends StatefulWidget {
