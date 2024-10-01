@@ -1,5 +1,6 @@
-import 'package:ecommerce_app/pages/bottommav.dart';
+import 'package:ecommerce_app/components/bottommav.dart';
 import 'package:ecommerce_app/pages/login.dart';
+import 'package:ecommerce_app/pages/register.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +31,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       title: 'SPEEDYEATS',
-      home: Login(),
+      home: Register(),
     );
   }
 }

@@ -6,12 +6,15 @@ class MyTextfield extends StatefulWidget {
   final String hintText;
   final bool isPasswordField;
   final Icon icon;
+  final String? Function(String?)? validatar; 
+
   const MyTextfield({
     super.key, 
     required this.controller, 
     required this.hintText, 
     required this.isPasswordField, 
     required this.icon, 
+    required this.validatar, 
   });
 
   @override
@@ -24,7 +27,8 @@ class _MyTextfieldState extends State<MyTextfield> {
   Widget build(BuildContext context) {
     return  Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: TextField(
+              child: TextFormField(
+                validator: widget.validatar,
                 controller: widget.controller,
                 obscureText: widget.isPasswordField? _isObsure: false,
                 style: FontSize.semiBoldTextFeilStyle(),

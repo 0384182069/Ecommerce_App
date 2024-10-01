@@ -2,44 +2,46 @@ import 'package:ecommerce_app/components/FontSize.dart';
 import 'package:ecommerce_app/components/Toast.dart';
 import 'package:ecommerce_app/components/bottommav.dart';
 import 'package:ecommerce_app/components/my_TextFormField.dart';
-import 'package:ecommerce_app/pages/register.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:ecommerce_app/pages/login.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-class Login extends StatefulWidget {
-  const Login({super.key});
+class Register extends StatefulWidget {
+  const Register({super.key});
 
   @override
-  State<Login> createState() => _LoginState();
+  State<Register> createState() => _RegisterState();
 }
 
-class _LoginState extends State<Login> {
-  // test123@gmail.com 
-  // test123456
-
-  String email = "", password = "";
+class _RegisterState extends State<Register> {
+  
+  String username = "", email = "", password = "" ,confirmpass="";
+  final usernameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  final confirmpassController = TextEditingController();
   final _formkey = GlobalKey<FormState>();
 
-  userLogin()async {
-    try{
-      await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
-      ToastHepler.showLoginSuccess_Top();
-      Navigator.push(context, MaterialPageRoute(builder: (context)=>const BottomNav()));
-      
-    }on FirebaseAuthException catch(e){
-      if(e.code == "user-not-found"){
-        ToastHepler.showUserNotFound_Top();
-      }
-      else if(e.code == "wrong-password"){
-        ToastHepler.showWrongPassword_Top();
-      }
-      else if(e.code == "user-disabled"){
-        ToastHepler.showUserDisabled_Top();
+  registration () async {
+    if(password!=null && username!=null && email!=null && confirmpass == password) {
+      try {
+        UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email, password: password);
+        ToastHepler.showSuccessRegister_Top();
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const BottomNav()));
+      }on FirebaseAuthException catch (e) {
+        if(e.code == "weak-password"){
+          ToastHepler.showWarningWeakPassword_Top();
+        }
+        else if(e.code == "email-already-in-use"){
+          ToastHepler.showAccountExsits_Top();
+        }
+        else if(e.code == "invalid-email"){
+          ToastHepler.showInvalidEmail_Top();
+        }
       }
     }
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -83,58 +85,85 @@ class _LoginState extends State<Login> {
                     child: Image.asset("images/logo.png",width: MediaQuery.of(context).size.width/2, fit: BoxFit.cover,),
                   ),
                   const SizedBox(height: 10,),
-                  Form(
-                    key: _formkey,
-                    child: Material(
-                      elevation: 5.0,
-                      borderRadius: BorderRadius.circular(20),
-                      child: Container(
-                        width: MediaQuery.of(context).size.width/1.2,
-                        height: MediaQuery.of(context).size.height/2.2,
-                        decoration: BoxDecoration(color: Colors.white,borderRadius: BorderRadius.circular(20)),
+                  Material(
+                    elevation: 5.0,
+                    borderRadius: BorderRadius.circular(20),
+                    child: Container(
+                      width: MediaQuery.of(context).size.width/1.2,
+                      height: MediaQuery.of(context).size.height/1.7,
+                      decoration: BoxDecoration(color: Colors.white,borderRadius: BorderRadius.circular(20)),
+                      child: Form(
+                        key: _formkey,
                         child: Column(children: [
                           const SizedBox(height: 20,),
-                          Text("Login",style: FontSize.headLineTextFeilStyle(),),
+                          Text("Register",style: FontSize.headLineTextFeilStyle(),),
                           const SizedBox(height: 20,),
                           MyTextfield(
                             validatar: (value){
-                              if (value == null || value.isEmpty){
+                              if(value == null || value.isEmpty){
+                                return "Please enter your name";
+                              }
+                              return null;
+                            },
+                            controller: usernameController,
+                            hintText: "Username",
+                            icon: const Icon(Icons.person_2_outlined,color: Colors.black,),
+                            isPasswordField: false,   
+                          ),
+                          const SizedBox(height: 5,),
+                          MyTextfield(
+                            validatar: (value){
+                              if(value == null || value.isEmpty){
                                 return "Please enter your email";
-                              }return null;
+                              }
+                              return null;
                             },
                             controller: emailController,
                             hintText: "Email",
                             icon: const Icon(Icons.email_outlined,color: Colors.black,),
-                            isPasswordField: false,
+                            isPasswordField: false,   
                           ),
                           const SizedBox(height: 5,),
                           MyTextfield(
                             validatar: (value){
-                              if (value == null || value.isEmpty){
+                              if(value == null || value.isEmpty){
                                 return "Please enter your password";
-                              }return null;
+                              }
+                              return null;
                             },
                             controller: passwordController,
                             hintText: "Password",
-                            icon: const Icon(Icons.lock_outlined,color: Colors.black,),
+                            icon: const Icon(Icons.lock_outline,color: Colors.black,),
                             isPasswordField: true,
                           ),
                           const SizedBox(height: 5,),
-                          Container(
-                            padding: const EdgeInsets.only(right: 20),
-                            alignment: Alignment.topRight,
-                            child: Text("Forget Password?",style: FontSize.lightTextFeilStyle(),),
+                          MyTextfield(
+                            validatar: (value){
+                              if(value == null || value.isEmpty){
+                                return "Please confirm your password";
+                              }
+                              if(value != passwordController.text){
+                                return "Password not matche";
+                              }
+                              return null;
+                            },
+                            controller: confirmpassController,
+                            hintText: "Confirm password",
+                            icon: const Icon(Icons.lock_reset_outlined,color: Colors.black,),
+                            isPasswordField: false,
                           ),
                           const SizedBox(height: 60,),
                           GestureDetector(
-                            onTap: ()async {
+                            onTap:()async{
                               if(_formkey.currentState!.validate()){
                                 setState(() {
-                                    email = emailController.text;
-                                    password = passwordController.text;
+                                  email = emailController.text;
+                                  username = usernameController.text;
+                                  password = passwordController.text;
+                                  confirmpass = confirmpassController.text;
                                 });
                               }
-                              userLogin();
+                              registration();
                             },
                             child: Material(
                               elevation: 5,
@@ -144,7 +173,7 @@ class _LoginState extends State<Login> {
                                 width: 200,
                                 decoration: BoxDecoration(color: const Color(0xFFFF5722),borderRadius: BorderRadius.circular(20)),
                                 child: const Center(child: Text(
-                                  "LOGIN", style: TextStyle(
+                                  "REGISTER", style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 22,
                                     fontFamily: "Poppins",
@@ -164,61 +193,15 @@ class _LoginState extends State<Login> {
                 
               ),
               Positioned(
-                bottom: 50,
+                bottom: 340,
                 left: 0,
                 right: 0,
                 child: Column(
                   children: [
-                  const Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                    Text("Or continue with", style: TextStyle(
-                      color: Colors.black38,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
-                      fontFamily: "Poppins",
-                      ),
-                    )
-                  ],),
-                  const SizedBox(height: 30,),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Material(
-                        borderRadius: BorderRadius.circular(10),
-                        elevation: 5,
-                        child: Container(
-                          padding: const EdgeInsets.only(top:10, left:10, right:10, bottom: 10,),
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.black,),
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.white,
-                          ),
-                          height: 60,
-                          child: Image.asset("images/google.png"),
-                        ),
-                      ),
-                      const SizedBox(width: 20,),
-                      Material(
-                        borderRadius: BorderRadius.circular(10),
-                        elevation: 5,
-                        child: Container(
-                          padding: const EdgeInsets.only(top:10, left:10, right:10, bottom: 10,),
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.black,),
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.white,
-                          ),
-                          height: 60,
-                          child: Image.asset("images/apple.png"),
-                        ),
-                      ),
-                  ],),
-                  const SizedBox(height: 30,),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                    const Text("Not a memmber?", style: TextStyle(
+                    const Text("Be a member?", style: TextStyle(
                       color: Colors.black38,
                       fontSize: 18,
                       fontWeight: FontWeight.w500,
@@ -228,9 +211,9 @@ class _LoginState extends State<Login> {
                     const SizedBox(width: 5,),
                     GestureDetector(
                       onTap: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=> const Register()));
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=> const Login()));
                       },
-                      child: const Text("Register now", style: TextStyle(
+                      child: const Text("Login now", style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                         fontFamily: "Poppins",

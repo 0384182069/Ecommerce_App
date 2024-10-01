@@ -38,7 +38,6 @@ class _HomeState extends State<Home> {
         ),
       ],
     ),
-    const SizedBox(height: 10),
     Text(
       "Delicious food",
       style: FontSize.headLineTextFeilStyle(),
@@ -47,9 +46,9 @@ class _HomeState extends State<Home> {
       "Discover and get food",
       style: FontSize.lightTextFeilStyle(),
     ),
-    const SizedBox(height: 10),
+    const SizedBox(height: 5),
     showItems(),
-    const SizedBox(height: 10),
+    const SizedBox(height: 5),
     SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Row(
@@ -73,14 +72,14 @@ class _HomeState extends State<Home> {
                     children: [
                       Image.asset(
                         "images/salad2.png",
-                        height: 200,
-                        width: 200,
+                        height: 180,
+                        width: 180,
                         fit: BoxFit.cover,
                       ),
                       Text("Veggies Taco Hash", style: FontSize.semiBoldTextFeilStyle()),
-                      const SizedBox(height: 5),
+                      const SizedBox(height: 2),
                       Text("Fresh and Healthy", style: FontSize.lightTextFeilStyle()),
-                      const SizedBox(height: 5),
+                      const SizedBox(height: 2),
                       Text("\$25", style: FontSize.semiBoldTextFeilStyle()),
                     ],
                   ),
@@ -99,14 +98,14 @@ class _HomeState extends State<Home> {
                 children: [
                   Image.asset(
                     "images/salad2.png",
-                    height: 200,
-                    width: 200,
+                    height: 180,
+                    width: 180,
                     fit: BoxFit.cover,
                   ),
                   Text("Mix Veggies Hash", style: FontSize.semiBoldTextFeilStyle()),
-                  const SizedBox(height: 5),
+                  const SizedBox(height: 2),
                   Text("Spicy with Onion", style: FontSize.lightTextFeilStyle()),
-                  const SizedBox(height: 5),
+                  const SizedBox(height: 2),
                   Text("\$25", style: FontSize.semiBoldTextFeilStyle()),
                 ],
               ),
@@ -127,8 +126,8 @@ class _HomeState extends State<Home> {
             children: [
               Image.asset(
                 "images/salad2.png",
-                height: 150,
-                width: 150,
+                height: 120,
+                width: 120,
                 fit: BoxFit.cover,
               ),
               const SizedBox(width: 20), 
@@ -169,8 +168,8 @@ class _HomeState extends State<Home> {
             children: [
               Image.asset(
                 "images/salad2.png",
-                height: 150,
-                width: 150,
+                height: 120,
+                width: 120,
                 fit: BoxFit.cover,
               ),
               const SizedBox(width: 20),
