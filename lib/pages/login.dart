@@ -27,7 +27,7 @@ class _LoginState extends State<Login> {
     try{
       await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
       ToastHepler.showLoginSuccess_Top();
-      Navigator.push(context, MaterialPageRoute(builder: (context)=>const BottomNav()));
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const BottomNav()));
       
     }on FirebaseAuthException catch(e){
       if(e.code == "user-not-found"){
@@ -191,6 +191,7 @@ class _LoginState extends State<Login> {
                           _isSigningIn=true;
                           try{
                             AuthMethods().signInWithGoogle(context);
+                            
                           }
                           finally{
                             _isSigningIn=false;
@@ -220,10 +221,10 @@ class _LoginState extends State<Login> {
                           decoration: BoxDecoration(
                             border: Border.all(color: Colors.black,),
                             borderRadius: BorderRadius.circular(10),
-                            color: Colors.white,
+                            color: Color(0xFF3D5B99),
                           ),
                           height: 60,
-                          child: Image.asset("images/apple.png"),
+                          child: Image.asset("images/facebook.png"),
                         ),
                       ),
                   ],),

@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/components/Toast.dart';
 import 'package:ecommerce_app/components/bottommav.dart';
 import 'package:ecommerce_app/services/cloud_store.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -36,7 +37,8 @@ class AuthMethods{
         "id": userDetails!.uid,
       };
       await CloudStore().addUser(userDetails.uid, userInfoMap).then((value){});
-      Navigator.push(context, MaterialPageRoute(builder: (context) => const BottomNav()));
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const BottomNav()));
+      ToastHepler.showLoginSuccess_Top();
     }
   }
 }
