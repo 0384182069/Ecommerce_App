@@ -3,6 +3,7 @@ import 'package:ecommerce_app/components/Toast.dart';
 import 'package:ecommerce_app/components/bottommav.dart';
 import 'package:ecommerce_app/components/my_TextFormField.dart';
 import 'package:ecommerce_app/pages/register.dart';
+import 'package:ecommerce_app/services/auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -16,7 +17,7 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   // test123@gmail.com 
   // test123456
-
+  bool _isSigningIn = false;
   String email = "", password = "";
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
@@ -164,7 +165,7 @@ class _LoginState extends State<Login> {
                 
               ),
               Positioned(
-                bottom: 50,
+                bottom: 340,
                 left: 0,
                 right: 0,
                 child: Column(
@@ -184,18 +185,30 @@ class _LoginState extends State<Login> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Material(
-                        borderRadius: BorderRadius.circular(10),
-                        elevation: 5,
-                        child: Container(
-                          padding: const EdgeInsets.only(top:10, left:10, right:10, bottom: 10,),
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.black,),
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.white,
+                      GestureDetector(
+                        onTap:(){
+                          if(_isSigningIn)return;
+                          _isSigningIn=true;
+                          try{
+                            AuthMethods().signInWithGoogle(context);
+                          }
+                          finally{
+                            _isSigningIn=false;
+                          }
+                        },
+                        child: Material(
+                          borderRadius: BorderRadius.circular(10),
+                          elevation: 5,
+                          child: Container(
+                            padding: const EdgeInsets.only(top:10, left:10, right:10, bottom: 10,),
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.black,),
+                              borderRadius: BorderRadius.circular(10),
+                              color: Colors.white,
+                            ),
+                            height: 60,
+                            child: Image.asset("images/google.png"),
                           ),
-                          height: 60,
-                          child: Image.asset("images/google.png"),
                         ),
                       ),
                       const SizedBox(width: 20,),

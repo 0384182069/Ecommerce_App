@@ -45,5 +45,16 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>CFBundleURLTypes</key>
+    <array>
+        <dict>
+            <key>CFBundleTypeRole</key>
+            <string>Editor</string>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>com.googleusercontent.apps.710412569298-2urse7u5m9s597s8e7s35ml3ktobfpqf</string> <!-- Thay bằng URL scheme của bạn -->
+            </array>
+        </dict>
+    </array>
 </dict>
 </plist>

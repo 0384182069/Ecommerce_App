@@ -23,7 +23,7 @@ class _RegisterState extends State<Register> {
   final _formkey = GlobalKey<FormState>();
 
   registration () async {
-    if(password!=null && username!=null && email!=null && confirmpass == password) {
+    if(password!="" && username!="" && email!="" && confirmpass == password) {
       try {
         UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email, password: password);
         ToastHepler.showSuccessRegister_Top();
