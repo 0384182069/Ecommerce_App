@@ -30,4 +30,13 @@ class FontSize{
               fontWeight: FontWeight.w500,
               fontFamily: "Poppins",);
   }
+
+  static userNameTextStyle(){
+    return const TextStyle(
+      color: Colors.white,
+      fontSize: 25,
+      fontWeight: FontWeight.bold,
+      fontFamily: "Poppins",
+    );
+  }
 }

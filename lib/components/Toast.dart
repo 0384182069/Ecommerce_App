@@ -93,7 +93,7 @@ class ToastHepler {
       gravity: ToastGravity.TOP,
       timeInSecForIosWeb: 1,
       textColor: Colors.white,
-      backgroundColor: Colors.green,
+      backgroundColor: Colors.red,
       fontSize: 16.0
     );
   }
@@ -105,7 +105,7 @@ class ToastHepler {
       gravity: ToastGravity.TOP,
       timeInSecForIosWeb: 1,
       textColor: Colors.white,
-      backgroundColor: Colors.green,
+      backgroundColor: Colors.red,
       fontSize: 16.0
     );
   }

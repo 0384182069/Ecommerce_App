@@ -25,15 +25,16 @@ class _LoginState extends State<Login> {
 
   userLogin()async {
     try{
-      await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
+      UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
       ToastHepler.showLoginSuccess_Top();
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const BottomNav()));
-      
-    }on FirebaseAuthException catch(e){
+
+      Navigator.push(context, MaterialPageRoute(builder: (context)=>const BottomNav()));
+    }on FirebaseAuthException catch(e) {
       if(e.code == "user-not-found"){
         ToastHepler.showUserNotFound_Top();
       }
       else if(e.code == "wrong-password"){
+        print("Wrong password");
         ToastHepler.showWrongPassword_Top();
       }
       else if(e.code == "user-disabled"){

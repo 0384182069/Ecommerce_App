@@ -150,7 +150,7 @@ class _RegisterState extends State<Register> {
                             controller: confirmpassController,
                             hintText: "Confirm password",
                             icon: const Icon(Icons.lock_reset_outlined,color: Colors.black,),
-                            isPasswordField: false,
+                            isPasswordField: true,
                           ),
                           const SizedBox(height: 60,),
                           GestureDetector(
