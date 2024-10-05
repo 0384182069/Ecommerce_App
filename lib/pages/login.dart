@@ -2,6 +2,7 @@ import 'package:ecommerce_app/components/FontSize.dart';
 import 'package:ecommerce_app/components/Toast.dart';
 import 'package:ecommerce_app/components/bottommav.dart';
 import 'package:ecommerce_app/components/my_TextFormField.dart';
+import 'package:ecommerce_app/pages/forgotpassword.dart';
 import 'package:ecommerce_app/pages/register.dart';
 import 'package:ecommerce_app/services/auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -25,24 +26,26 @@ class _LoginState extends State<Login> {
 
   userLogin()async {
     try{
+      showDialog(context: context, builder: (context){
+        return const Center(child: CircularProgressIndicator(),);
+      });
       UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
-      ToastHepler.showLoginSuccess_Top();
+      Navigator.of(context).pop();
 
       Navigator.push(context, MaterialPageRoute(builder: (context)=>const BottomNav()));
+      ToastHelper.showToast("Login Successfully!", Colors.green);
     }on FirebaseAuthException catch(e) {
       if(e.code == "user-not-found"){
-        ToastHepler.showUserNotFound_Top();
+        ToastHelper.showToast("Wrong password or email!", Colors.red);
+      }
+      else if (e.code == "invalid-credential") {
+      ToastHelper.showToast("Invalid credential!", Colors.red);
       }
       else if(e.code == "wrong-password"){
-        print("Wrong password");
-        ToastHepler.showWrongPassword_Top();
-      }
-      else if(e.code == "user-disabled"){
-        ToastHepler.showUserDisabled_Top();
+        ToastHelper.showToast("Wrong password or email!", Colors.red);
       }
     }
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -122,10 +125,17 @@ class _LoginState extends State<Login> {
                             isPasswordField: true,
                           ),
                           const SizedBox(height: 5,),
-                          Container(
-                            padding: const EdgeInsets.only(right: 20),
-                            alignment: Alignment.topRight,
-                            child: Text("Forget Password?",style: FontSize.lightTextFeilStyle(),),
+                          GestureDetector(
+                            onTap: (){
+                              setState(() {
+                                Navigator.push(context, MaterialPageRoute(builder: (context)=>const ForgotPassword()));
+                              });
+                            },
+                            child: Container(
+                              padding: const EdgeInsets.only(right: 20),
+                              alignment: Alignment.topRight,
+                              child: Text("Forget Password?",style: FontSize.lightTextFeilStyle(),),
+                            ),
                           ),
                           const SizedBox(height: 60,),
                           GestureDetector(

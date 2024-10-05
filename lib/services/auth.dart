@@ -38,7 +38,7 @@ class AuthMethods{
       };
       await CloudStore().addUser(userDetails.uid, userInfoMap).then((value){});
       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const BottomNav()));
-      ToastHepler.showLoginSuccess_Top();
+      ToastHelper.showToast("Login Successfully!", Colors.green);
     }
   }
 }

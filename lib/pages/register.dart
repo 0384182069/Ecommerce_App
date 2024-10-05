@@ -25,18 +25,24 @@ class _RegisterState extends State<Register> {
   registration () async {
     if(password!="" && username!="" && email!="" && confirmpass == password) {
       try {
+        showDialog(context: context, builder: (context){
+          return const Center(child: CircularProgressIndicator(),);
+        });
+
         UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email, password: password);
-        ToastHepler.showSuccessRegister_Top();
+        Navigator.of(context).pop();
+
         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const BottomNav()));
+        ToastHelper.showToast("Register Successfully!", Colors.green);
       }on FirebaseAuthException catch (e) {
         if(e.code == "weak-password"){
-          ToastHepler.showWarningWeakPassword_Top();
+          ToastHelper.showToast("Password too weak", Colors.orange);
         }
         else if(e.code == "email-already-in-use"){
-          ToastHepler.showAccountExsits_Top();
+          ToastHelper.showToast("Email already exists", Colors.orange);
         }
         else if(e.code == "invalid-email"){
-          ToastHepler.showInvalidEmail_Top();
+          ToastHelper.showToast("Invalid email", Colors.orange);
         }
       }
     }
