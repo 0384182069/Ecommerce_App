@@ -1,6 +1,6 @@
-import 'package:ecommerce_app/components/FontSize.dart';
-import 'package:ecommerce_app/components/my_TextFormField.dart';
-import 'package:ecommerce_app/pages/register.dart';
+import 'package:ecommerce_app/widgets/my_FontStyle.dart';
+import 'package:ecommerce_app/widgets/my_TextFormField.dart';
+import 'package:ecommerce_app/screens/register_screen.dart';
 import 'package:flutter/material.dart';
 
 class ForgotPassword extends StatefulWidget {

@@ -1,5 +1,5 @@
-import 'package:ecommerce_app/pages/details.dart';
-import 'package:ecommerce_app/components/FontSize.dart';
+import 'package:ecommerce_app/screens/details_screen.dart';
+import 'package:ecommerce_app/widgets/my_FontStyle.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {

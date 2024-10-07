@@ -1,8 +1,8 @@
-import 'package:ecommerce_app/components/FontSize.dart';
-import 'package:ecommerce_app/components/Toast.dart';
-import 'package:ecommerce_app/components/bottommav.dart';
-import 'package:ecommerce_app/components/my_TextFormField.dart';
-import 'package:ecommerce_app/pages/login.dart';
+import 'package:ecommerce_app/widgets/my_FontStyle.dart';
+import 'package:ecommerce_app/widgets/my_Toast.dart';
+import 'package:ecommerce_app/widgets/my_BottomNav.dart';
+import 'package:ecommerce_app/widgets/my_TextFormField.dart';
+import 'package:ecommerce_app/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -36,12 +36,15 @@ class _RegisterState extends State<Register> {
         ToastHelper.showToast("Register Successfully!", Colors.green);
       }on FirebaseAuthException catch (e) {
         if(e.code == "weak-password"){
+          Navigator.of(context).pop();
           ToastHelper.showToast("Password too weak", Colors.orange);
         }
         else if(e.code == "email-already-in-use"){
+          Navigator.of(context).pop();
           ToastHelper.showToast("Email already exists", Colors.orange);
         }
         else if(e.code == "invalid-email"){
+          Navigator.of(context).pop();
           ToastHelper.showToast("Invalid email", Colors.orange);
         }
       }
@@ -163,7 +166,7 @@ class _RegisterState extends State<Register> {
                             onTap:()async{
                               if(_formkey.currentState!.validate()){
                                 setState(() {
-                                  email = emailController.text;
+                                  email = emailController.text.trim();
                                   username = usernameController.text;
                                   password = passwordController.text;
                                   confirmpass = confirmpassController.text;

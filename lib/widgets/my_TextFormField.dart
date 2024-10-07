@@ -1,4 +1,4 @@
-import 'package:ecommerce_app/components/FontSize.dart';
+import 'package:ecommerce_app/widgets/my_FontStyle.dart';
 import 'package:flutter/material.dart';
 
 class MyTextfield extends StatefulWidget {

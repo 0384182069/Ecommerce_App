@@ -1,6 +1,6 @@
-import 'package:ecommerce_app/components/Toast.dart';
-import 'package:ecommerce_app/components/bottommav.dart';
-import 'package:ecommerce_app/services/cloud_store.dart';
+import 'package:ecommerce_app/widgets/my_Toast.dart';
+import 'package:ecommerce_app/widgets/my_BottomNav.dart';
+import 'package:ecommerce_app/models/cloud_store.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';

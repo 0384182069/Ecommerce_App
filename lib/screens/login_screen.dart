@@ -1,9 +1,9 @@
-import 'package:ecommerce_app/components/FontSize.dart';
-import 'package:ecommerce_app/components/Toast.dart';
-import 'package:ecommerce_app/components/bottommav.dart';
-import 'package:ecommerce_app/components/my_TextFormField.dart';
-import 'package:ecommerce_app/pages/forgotpassword.dart';
-import 'package:ecommerce_app/pages/register.dart';
+import 'package:ecommerce_app/widgets/my_FontStyle.dart';
+import 'package:ecommerce_app/widgets/my_Toast.dart';
+import 'package:ecommerce_app/widgets/my_BottomNav.dart';
+import 'package:ecommerce_app/widgets/my_TextFormField.dart';
+import 'package:ecommerce_app/screens/forgotpassword_screen.dart';
+import 'package:ecommerce_app/screens/register_screen.dart';
 import 'package:ecommerce_app/services/auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -35,14 +35,18 @@ class _LoginState extends State<Login> {
       Navigator.push(context, MaterialPageRoute(builder: (context)=>const BottomNav()));
       ToastHelper.showToast("Login Successfully!", Colors.green);
     }on FirebaseAuthException catch(e) {
+      print('Error code: ${e.code}, Error message: ${e.message}');
       if(e.code == "user-not-found"){
+        Navigator.of(context).pop();
+        ToastHelper.showToast("Wrong password or email!", Colors.red);
+      }
+      else if(e.code == "wrong-password"){
+        Navigator.of(context).pop();
         ToastHelper.showToast("Wrong password or email!", Colors.red);
       }
       else if (e.code == "invalid-credential") {
-      ToastHelper.showToast("Invalid credential!", Colors.red);
-      }
-      else if(e.code == "wrong-password"){
-        ToastHelper.showToast("Wrong password or email!", Colors.red);
+        Navigator.of(context).pop();
+        ToastHelper.showToast("Invalid credential!", Colors.red);
       }
     }
   }
@@ -142,7 +146,7 @@ class _LoginState extends State<Login> {
                             onTap: ()async {
                               if(_formkey.currentState!.validate()){
                                 setState(() {
-                                    email = emailController.text;
+                                    email = emailController.text.trim();
                                     password = passwordController.text;
                                 });
                               }
