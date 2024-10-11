@@ -1,4 +1,5 @@
-import 'package:ecommerce_app/widgets/my_FontStyle.dart';
+
+import 'package:ecommerce_app/utils/text_helper.dart';
 import 'package:flutter/material.dart';
 
 class Profile extends StatefulWidget {
@@ -44,7 +45,7 @@ class _ProfileState extends State<Profile> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                Text("Pham Hoai Phuc", style: FontSize.userNameTextStyle(),)
+                Text("Pham Hoai Phuc", style: TextHelper.headerTextStyle(color: Colors.white),)
               ],),
             ),
           ],),
@@ -66,8 +67,8 @@ class _ProfileState extends State<Profile> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                      Text("Name", style: FontSize.semiBoldTextFeilStyle(),),
-                      Text("Pham Hoai Phuc", style: FontSize.semiBoldTextFeilStyle(),)
+                      Text("Name", style: TextHelper.bodyTextStyle(),),
+                      Text("Pham Hoai Phuc", style: TextHelper.bodyTextStyle(),)
                     ],)
                   ],),
                 ),
@@ -91,8 +92,8 @@ class _ProfileState extends State<Profile> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                      Text("Email", style: FontSize.semiBoldTextFeilStyle(),),
-                      Text("hoaiphuc24012004@gmail.com", style: FontSize.semiBoldTextFeilStyle(),)
+                      Text("Email", style: TextHelper.bodyTextStyle(),),
+                      Text("hoaiphuc24012004@gmail.com", style: TextHelper.bodyTextStyle(),)
                     ],)
                   ],),
                 ),
@@ -116,7 +117,7 @@ class _ProfileState extends State<Profile> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                      Text("Term and condition", style: FontSize.headLineTextFeilStyle(),)
+                      Text("Term and condition", style: TextHelper.headerTextStyle(),)
                     ],)
                   ],),
                 ),
@@ -140,7 +141,7 @@ class _ProfileState extends State<Profile> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                      Text("Delete account", style: FontSize.headLineTextFeilStyle(),),
+                      Text("Delete account", style: TextHelper.headerTextStyle(),),
                     ],)
                   ],),
                 ),
@@ -164,7 +165,7 @@ class _ProfileState extends State<Profile> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                      Text("Logout", style: FontSize.headLineTextFeilStyle(),),
+                      Text("Logout", style: TextHelper.headerTextStyle(),),
                     ],)
                   ],),
                 ),

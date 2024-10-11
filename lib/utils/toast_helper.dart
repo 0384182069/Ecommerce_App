@@ -2,7 +2,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/material.dart';
 
 class ToastHelper {
-  static void showToast(String message, Color backgroundColor) {
+  static showToast(String message, Color backgroundColor) {
     Fluttertoast.showToast(
       msg: message,
       toastLength: Toast.LENGTH_SHORT,

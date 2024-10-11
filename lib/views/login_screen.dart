@@ -1,12 +1,15 @@
-import 'package:ecommerce_app/widgets/my_FontStyle.dart';
-import 'package:ecommerce_app/widgets/my_Toast.dart';
-import 'package:ecommerce_app/widgets/my_BottomNav.dart';
-import 'package:ecommerce_app/widgets/my_TextFormField.dart';
-import 'package:ecommerce_app/screens/forgotpassword_screen.dart';
-import 'package:ecommerce_app/screens/register_screen.dart';
+
+import 'package:ecommerce_app/utils/text_helper.dart';
+import 'package:ecommerce_app/utils/toast_helper.dart';
+import 'package:ecommerce_app/view_models/login_view_model.dart';
+import 'package:ecommerce_app/widgets/bottom_nav.dart';
+import 'package:ecommerce_app/widgets/text_form_field.dart';
+import 'package:ecommerce_app/views/forgotpassword_screen.dart';
+import 'package:ecommerce_app/views/register_screen.dart';
 import 'package:ecommerce_app/services/auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -18,40 +21,14 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   // test123@gmail.com 
   // test123456
-  bool _isSigningIn = false;
   String email = "", password = "";
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final _formkey = GlobalKey<FormState>();
 
-  userLogin()async {
-    try{
-      showDialog(context: context, builder: (context){
-        return const Center(child: CircularProgressIndicator(),);
-      });
-      UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
-      Navigator.of(context).pop();
-
-      Navigator.push(context, MaterialPageRoute(builder: (context)=>const BottomNav()));
-      ToastHelper.showToast("Login Successfully!", Colors.green);
-    }on FirebaseAuthException catch(e) {
-      print('Error code: ${e.code}, Error message: ${e.message}');
-      if(e.code == "user-not-found"){
-        Navigator.of(context).pop();
-        ToastHelper.showToast("Wrong password or email!", Colors.red);
-      }
-      else if(e.code == "wrong-password"){
-        Navigator.of(context).pop();
-        ToastHelper.showToast("Wrong password or email!", Colors.red);
-      }
-      else if (e.code == "invalid-credential") {
-        Navigator.of(context).pop();
-        ToastHelper.showToast("Invalid credential!", Colors.red);
-      }
-    }
-  }
   @override
   Widget build(BuildContext context) {
+    final loginViewModel = Provider.of<LoginViewModel>(context);
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
@@ -103,7 +80,7 @@ class _LoginState extends State<Login> {
                         decoration: BoxDecoration(color: Colors.white,borderRadius: BorderRadius.circular(20)),
                         child: Column(children: [
                           const SizedBox(height: 20,),
-                          Text("Login",style: FontSize.headLineTextFeilStyle(),),
+                          Text("Login",style: TextHelper.headerTextStyle(),),
                           const SizedBox(height: 20,),
                           MyTextfield(
                             validatar: (value){
@@ -138,19 +115,22 @@ class _LoginState extends State<Login> {
                             child: Container(
                               padding: const EdgeInsets.only(right: 20),
                               alignment: Alignment.topRight,
-                              child: Text("Forget Password?",style: FontSize.lightTextFeilStyle(),),
+                              child: Text("Forget Password?",style: TextHelper.subtitleTextStyle(),),
                             ),
                           ),
                           const SizedBox(height: 60,),
                           GestureDetector(
-                            onTap: ()async {
-                              if(_formkey.currentState!.validate()){
-                                setState(() {
-                                    email = emailController.text.trim();
-                                    password = passwordController.text;
-                                });
-                              }
-                              userLogin();
+                            onTap: () async {
+                              if (_formkey.currentState!.validate()) {
+                                email = emailController.text.trim();
+                                password = passwordController.text.trim();
+
+                                loginViewModel.userLogin(
+                                  email: email,
+                                  password: password,
+                                  context: context,
+                                );
+                              }  
                             },
                             child: Material(
                               elevation: 5,
@@ -202,15 +182,8 @@ class _LoginState extends State<Login> {
                     children: [
                       GestureDetector(
                         onTap:(){
-                          if(_isSigningIn)return;
-                          _isSigningIn=true;
-                          try{
-                            AuthMethods().signInWithGoogle(context);
-                            
-                          }
-                          finally{
-                            _isSigningIn=false;
-                          }
+                          if (loginViewModel.isSigningIn) return; 
+                          loginViewModel.signInWithGoogle(context); 
                         },
                         child: Material(
                           borderRadius: BorderRadius.circular(10),

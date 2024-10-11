@@ -1,8 +1,9 @@
-import 'package:ecommerce_app/widgets/my_FontStyle.dart';
-import 'package:ecommerce_app/widgets/my_Toast.dart';
-import 'package:ecommerce_app/widgets/my_BottomNav.dart';
-import 'package:ecommerce_app/widgets/my_TextFormField.dart';
-import 'package:ecommerce_app/screens/login_screen.dart';
+
+import 'package:ecommerce_app/utils/text_helper.dart';
+import 'package:ecommerce_app/utils/toast_helper.dart';
+import 'package:ecommerce_app/widgets/bottom_nav.dart';
+import 'package:ecommerce_app/widgets/text_form_field.dart';
+import 'package:ecommerce_app/views/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -105,7 +106,7 @@ class _RegisterState extends State<Register> {
                         key: _formkey,
                         child: Column(children: [
                           const SizedBox(height: 20,),
-                          Text("Register",style: FontSize.headLineTextFeilStyle(),),
+                          Text("Register",style: TextHelper.headerTextStyle(),),
                           const SizedBox(height: 20,),
                           MyTextfield(
                             validatar: (value){

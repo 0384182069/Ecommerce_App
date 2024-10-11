@@ -1,5 +1,5 @@
-import 'package:ecommerce_app/screens/details_screen.dart';
-import 'package:ecommerce_app/widgets/my_FontStyle.dart';
+import 'package:ecommerce_app/utils/text_helper.dart';
+import 'package:ecommerce_app/views/details_screen.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
@@ -23,7 +23,7 @@ class _HomeState extends State<Home> {
         children: [
         Text(
           "Hello Join",
-          style: FontSize.boilTextFeilStyle(),
+          style: TextHelper.bodyTextStyle(),
         ),
         Container(
           padding: const EdgeInsets.all(5),
@@ -40,11 +40,11 @@ class _HomeState extends State<Home> {
     ),
     Text(
       "Delicious food",
-      style: FontSize.headLineTextFeilStyle(),
+      style: TextHelper.headerTextStyle(),
     ),
     Text(
       "Discover and get food",
-      style: FontSize.lightTextFeilStyle(),
+      style: TextHelper.subtitleTextStyle(),
     ),
     const SizedBox(height: 5),
     showItems(),
@@ -76,11 +76,11 @@ class _HomeState extends State<Home> {
                         width: 180,
                         fit: BoxFit.cover,
                       ),
-                      Text("Veggies Taco Hash", style: FontSize.semiBoldTextFeilStyle()),
+                      Text("Veggies Taco Hash", style: TextHelper.bodyTextStyle()),
                       const SizedBox(height: 2),
-                      Text("Fresh and Healthy", style: FontSize.lightTextFeilStyle()),
+                      Text("Fresh and Healthy", style: TextHelper.subtitleTextStyle()),
                       const SizedBox(height: 2),
-                      Text("\$25", style: FontSize.semiBoldTextFeilStyle()),
+                      Text("\$25", style: TextHelper.bodyTextStyle()),
                     ],
                   ),
                 ),
@@ -102,11 +102,11 @@ class _HomeState extends State<Home> {
                     width: 180,
                     fit: BoxFit.cover,
                   ),
-                  Text("Mix Veggies Hash", style: FontSize.semiBoldTextFeilStyle()),
+                  Text("Mix Veggies Hash", style: TextHelper.bodyTextStyle()),
                   const SizedBox(height: 2),
-                  Text("Spicy with Onion", style: FontSize.lightTextFeilStyle()),
+                  Text("Spicy with Onion", style: TextHelper.subtitleTextStyle()),
                   const SizedBox(height: 2),
-                  Text("\$25", style: FontSize.semiBoldTextFeilStyle()),
+                  Text("\$25", style: TextHelper.bodyTextStyle()),
                 ],
               ),
             ),
@@ -137,17 +137,17 @@ class _HomeState extends State<Home> {
                   Container(
                     width: MediaQuery.of(context).size.width / 2.5,
                     child: Text(
-                      "Mediterranean Chickpea Salad", style: FontSize.semiBoldTextFeilStyle()),
+                      "Mediterranean Chickpea Salad", style: TextHelper.bodyTextStyle()),
                   ),
                   const SizedBox(height: 5),
                   Container(
                     width: MediaQuery.of(context).size.width / 2.5,
-                    child: Text("Honey goat cheese", style: FontSize.lightTextFeilStyle()),
+                    child: Text("Honey goat cheese", style: TextHelper.subtitleTextStyle()),
                   ),
                   const SizedBox(height: 5),
                   Container(
                     width: MediaQuery.of(context).size.width / 2.5,
-                    child: Text("\$28", style: FontSize.semiBoldTextFeilStyle()),
+                    child: Text("\$28", style: TextHelper.bodyTextStyle()),
                   ),
                 ],
               ),
@@ -178,17 +178,17 @@ class _HomeState extends State<Home> {
                   const SizedBox(height:20),
                   Container(
                     width: MediaQuery.of(context).size.width / 2.5,
-                    child: Text("Mediterranean Chickpea Salad", style: FontSize.semiBoldTextFeilStyle()),
+                    child: Text("Mediterranean Chickpea Salad", style: TextHelper.bodyTextStyle()),
                   ),
                   const SizedBox(height: 5),
                   Container(
                     width: MediaQuery.of(context).size.width / 2.5,
-                    child: Text("Honey goat cheese", style: FontSize.lightTextFeilStyle()),
+                    child: Text("Honey goat cheese", style: TextHelper.subtitleTextStyle()),
                   ),
                   const SizedBox(height: 5),
                   Container(
                     width: MediaQuery.of(context).size.width / 2.5,
-                    child: Text("\$28", style: FontSize.semiBoldTextFeilStyle()),
+                    child: Text("\$28", style: TextHelper.bodyTextStyle()),
                   ),
                 ],
               ),

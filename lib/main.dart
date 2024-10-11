@@ -1,7 +1,9 @@
-import 'package:ecommerce_app/screens/login_screen.dart';
+import 'package:ecommerce_app/view_models/login_view_model.dart';
+import 'package:ecommerce_app/views/login_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,8 +20,12 @@ void main() async{
   }else{
     await Firebase.initializeApp();
   }
-  runApp(const MyApp());
-
+  runApp( MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => LoginViewModel()),
+      ],
+      child: const MyApp(),
+    ),);
 }
 
 class MyApp extends StatelessWidget {
@@ -28,6 +34,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'SPEEDYEATS',
       home: Login(),
     );

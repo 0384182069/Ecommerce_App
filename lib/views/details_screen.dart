@@ -1,5 +1,7 @@
-import 'package:ecommerce_app/widgets/my_FontStyle.dart';
+import 'package:ecommerce_app/utils/text_helper.dart';
 import 'package:flutter/material.dart';
+
+
 
 class Details extends StatefulWidget {
   const Details({super.key});
@@ -44,8 +46,8 @@ class _DetailsState extends State<Details> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("Mediterranean", style: FontSize.boilTextFeilStyle(),),
-                  Text("Chickpea Salad", style: FontSize.boilTextFeilStyle(),),
+                  Text("Mediterranean", style: TextHelper.bodyTextStyle(),),
+                  Text("Chickpea Salad", style: TextHelper.bodyTextStyle(),),
                 ],
               ),
               const Spacer(),
@@ -63,7 +65,7 @@ class _DetailsState extends State<Details> {
                 ),
               ),
               const SizedBox(width: 10,),
-              Text(quantity.toString(),style: FontSize.semiBoldTextFeilStyle(),),
+              Text(quantity.toString(),style: TextHelper.bodyTextStyle(),),
               const SizedBox(width: 10,),
               GestureDetector(
                 onTap: (){
@@ -80,14 +82,14 @@ class _DetailsState extends State<Details> {
             const SizedBox(height: 10,),
             Text(
               "A Mediterranean Chickpea Salad is a vibrant, healthy dish packed with fresh ingredients and bold flavors.",
-              style: FontSize.lightTextFeilStyle(),
+              style: TextHelper.subtitleTextStyle(),
             ),
             Row(children: [
-              Text("Delivary Time", style: FontSize.semiBoldTextFeilStyle(),),
+              Text("Delivary Time", style: TextHelper.bodyTextStyle(),),
               const SizedBox(width: 10,),
               const Icon(Icons.alarm, color: Colors.black54,),
               const SizedBox(width: 10,),
-              Text("30 min", style: FontSize.semiBoldTextFeilStyle(),),
+              Text("30 min", style: TextHelper.bodyTextStyle(),),
             ],),
             const Spacer(),
             Padding(
@@ -98,8 +100,8 @@ class _DetailsState extends State<Details> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                  Text("Total Price", style: FontSize.boilTextFeilStyle(),),
-                  Text("\$28",style: FontSize.headLineTextFeilStyle(),),
+                  Text("Total Price", style: TextHelper.bodyTextStyle(),),
+                  Text("\$28",style: TextHelper.headerTextStyle(),),
                 ],),
                 Container(
                   padding: const EdgeInsets.all(8),

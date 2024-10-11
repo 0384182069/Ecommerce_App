@@ -1,4 +1,4 @@
-import 'package:ecommerce_app/widgets/my_FontStyle.dart';
+import 'package:ecommerce_app/utils/text_helper.dart';
 import 'package:flutter/material.dart';
 
 class MyTextfield extends StatefulWidget {
@@ -31,9 +31,9 @@ class _MyTextfieldState extends State<MyTextfield> {
                 validator: widget.validatar,
                 controller: widget.controller,
                 obscureText: widget.isPasswordField? _isObsure: false,
-                style: FontSize.semiBoldTextFeilStyle(),
+                style: TextHelper.bodyTextStyle(),
                 decoration: InputDecoration(
-                hintStyle: FontSize.semiBoldTextFeilStyle(),
+                hintStyle: TextHelper.bodyTextStyle(),
                 hintText: widget.hintText,
                 prefixIcon: widget.icon,
                 suffixIcon: widget.isPasswordField

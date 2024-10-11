@@ -1,6 +1,6 @@
-import 'package:ecommerce_app/widgets/my_FontStyle.dart';
-import 'package:ecommerce_app/widgets/my_TextFormField.dart';
-import 'package:ecommerce_app/screens/register_screen.dart';
+import 'package:ecommerce_app/utils/text_helper.dart';
+import 'package:ecommerce_app/widgets/text_form_field.dart';
+import 'package:ecommerce_app/views/register_screen.dart';
 import 'package:flutter/material.dart';
 
 class ForgotPassword extends StatefulWidget {
@@ -74,7 +74,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(20),
                       ),
-                      child: Center(child: Text("Send Email",style: FontSize.semiBoldTextFeilStyle())),
+                      child: Center(child: Text("Send Email",style: TextHelper.bodyTextStyle(),)),
                     ),
                     const SizedBox(height: 50,),
                     Row(
