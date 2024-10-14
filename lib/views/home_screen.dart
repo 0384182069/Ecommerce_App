@@ -1,6 +1,8 @@
 import 'package:ecommerce_app/utils/text_helper.dart';
+import 'package:ecommerce_app/view_models/login_view_model.dart';
 import 'package:ecommerce_app/views/details_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -14,6 +16,8 @@ class _HomeState extends State<Home> {
   
   @override
   Widget build(BuildContext context) {
+    final loginViewModel = Provider.of<LoginViewModel>(context);
+    final user = loginViewModel.user;
     return Scaffold(
       body: ListView(
         padding: const EdgeInsets.only(top: 50, left: 15, right: 15),
@@ -22,7 +26,7 @@ class _HomeState extends State<Home> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
         Text(
-          "Hello Join",
+          "Hello ${user?.displayName}",
           style: TextHelper.bodyTextStyle(),
         ),
         Container(
@@ -48,152 +52,91 @@ class _HomeState extends State<Home> {
     ),
     const SizedBox(height: 5),
     showItems(),
-    const SizedBox(height: 5),
+    const SizedBox(height: 10),
     SingleChildScrollView(
       scrollDirection: Axis.horizontal,
-      child: Row(
-        children: [
-          GestureDetector(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const Details()),
-              );
-            },
-            child: Container(
-              margin: const EdgeInsets.all(4),
-              child: Material(
-                elevation: 5,
-                borderRadius: BorderRadius.circular(25),
-                child: Container(
-                  padding: const EdgeInsets.all(14),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Image.asset(
-                        "images/salad2.png",
-                        height: 180,
-                        width: 180,
-                        fit: BoxFit.cover,
-                      ),
-                      Text("Veggies Taco Hash", style: TextHelper.bodyTextStyle()),
-                      const SizedBox(height: 2),
-                      Text("Fresh and Healthy", style: TextHelper.subtitleTextStyle()),
-                      const SizedBox(height: 2),
-                      Text("\$25", style: TextHelper.bodyTextStyle()),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ),
-          const SizedBox(width: 10),
+        child: Row(children: [
           Material(
             elevation: 5,
             borderRadius: BorderRadius.circular(25),
-            child: Container(
-              padding: const EdgeInsets.all(14),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Image.asset(
-                    "images/salad2.png",
-                    height: 180,
-                    width: 180,
-                    fit: BoxFit.cover,
-                  ),
-                  Text("Mix Veggies Hash", style: TextHelper.bodyTextStyle()),
-                  const SizedBox(height: 2),
-                  Text("Spicy with Onion", style: TextHelper.subtitleTextStyle()),
-                  const SizedBox(height: 2),
-                  Text("\$25", style: TextHelper.bodyTextStyle()),
-                ],
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(25),
+              child: Container(
+                width: 320,
+                height: 180,
+                child: Image.asset("images/banner1.png", fit: BoxFit.cover,),
               ),
             ),
           ),
-        ],
-      ),
+          const SizedBox(width: 10,),
+          Material(
+            elevation: 5,
+            borderRadius: BorderRadius.circular(25),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(25),
+              child: Container(
+                width: 320,
+                height: 180,
+                child: Image.asset("images/banner2.png", fit: BoxFit.cover,),
+              ),
+            ),
+          ),
+        ],)
     ),
     const SizedBox(height: 10),
     Container(
-      child: Material(
-        elevation: 5,
-        borderRadius: BorderRadius.circular(25),
-        child: Container(
-          padding: const EdgeInsets.all(5),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Image.asset(
-                "images/salad2.png",
-                height: 120,
-                width: 120,
-                fit: BoxFit.cover,
+      padding: const EdgeInsets.all(5),
+      child: IntrinsicHeight(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+           GestureDetector(
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const Details()));
+            },
+             child: Material(
+              elevation: 5,
+              borderRadius: BorderRadius.circular(25),
+              child: Padding(
+                padding: const EdgeInsets.all(5),
+                child: Column(
+                  children: [
+                    Image.asset("images/1-Fried-Chicken.png",width: 165,height: 165,fit: BoxFit.cover,),
+                    SizedBox(
+                      width: 160,
+                      child: Text(
+                        "1 Miếng Gà Rán",
+                        style: TextHelper.bodyTextStyle(), 
+                        textAlign: TextAlign.center,
+                        softWrap: true,
+                      )
+                    )
+                  ],
+                ),
               ),
-              const SizedBox(width: 20), 
-              Column(
+             ),
+           ),
+            Material(
+            elevation: 5,
+            borderRadius: BorderRadius.circular(25),
+            child: Padding(padding: EdgeInsets.all(5),
+              child: Column(
                 children: [
-                  const SizedBox(height:20),
-                  Container(
-                    width: MediaQuery.of(context).size.width / 2.5,
+                  Image.asset("images/2-Fried-Chicken.png",width: 165,height: 165,fit: BoxFit.cover,),
+                  SizedBox(
+                    width: 160,
                     child: Text(
-                      "Mediterranean Chickpea Salad", style: TextHelper.bodyTextStyle()),
-                  ),
-                  const SizedBox(height: 5),
-                  Container(
-                    width: MediaQuery.of(context).size.width / 2.5,
-                    child: Text("Honey goat cheese", style: TextHelper.subtitleTextStyle()),
-                  ),
-                  const SizedBox(height: 5),
-                  Container(
-                    width: MediaQuery.of(context).size.width / 2.5,
-                    child: Text("\$28", style: TextHelper.bodyTextStyle()),
-                  ),
+                      "2 Miếng Gà Giòn",
+                      style: TextHelper.bodyTextStyle(), 
+                      textAlign: TextAlign.center,
+                      softWrap: true,
+                    )
+                  )
                 ],
               ),
-            ],
-          ),
-        ),
-      ),
-    ),
-    const SizedBox(height: 10,),
-    Container(
-      child: Material(
-        elevation: 5,
-        borderRadius: BorderRadius.circular(25),
-        child: Container(
-          padding: const EdgeInsets.all(5),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Image.asset(
-                "images/salad2.png",
-                height: 120,
-                width: 120,
-                fit: BoxFit.cover,
-              ),
-              const SizedBox(width: 20),
-              Column(
-                children: [
-                  const SizedBox(height:20),
-                  Container(
-                    width: MediaQuery.of(context).size.width / 2.5,
-                    child: Text("Mediterranean Chickpea Salad", style: TextHelper.bodyTextStyle()),
-                  ),
-                  const SizedBox(height: 5),
-                  Container(
-                    width: MediaQuery.of(context).size.width / 2.5,
-                    child: Text("Honey goat cheese", style: TextHelper.subtitleTextStyle()),
-                  ),
-                  const SizedBox(height: 5),
-                  Container(
-                    width: MediaQuery.of(context).size.width / 2.5,
-                    child: Text("\$28", style: TextHelper.bodyTextStyle()),
-                  ),
-                ],
-              ),
-            ],
-          ),
+            ),
+           ),
+          ],
         ),
       ),
     ),

@@ -22,7 +22,7 @@ class MyTextfield extends StatefulWidget {
 }
 
 class _MyTextfieldState extends State<MyTextfield> {
-  bool _isObsure = true;
+  bool _isObscure = true;
   @override
   Widget build(BuildContext context) {
     return  Padding(
@@ -30,21 +30,21 @@ class _MyTextfieldState extends State<MyTextfield> {
               child: TextFormField(
                 validator: widget.validatar,
                 controller: widget.controller,
-                obscureText: widget.isPasswordField? _isObsure: false,
+                obscureText: widget.isPasswordField? _isObscure: false,
                 style: TextHelper.bodyTextStyle(),
                 decoration: InputDecoration(
-                hintStyle: TextHelper.bodyTextStyle(),
+                hintStyle: TextHelper.subtitleTextStyle(),
                 hintText: widget.hintText,
                 prefixIcon: widget.icon,
                 suffixIcon: widget.isPasswordField
                 ?IconButton(
                   icon: Icon(
-                    _isObsure ? Icons.visibility: Icons.visibility_off,
+                    _isObscure ? Icons.visibility: Icons.visibility_off,
                     color: Colors.grey,
                   ),
                   onPressed: (){
                     setState(() {
-                      _isObsure = !_isObsure;
+                      _isObscure = !_isObscure;
                     });
                   },
                 ): const SizedBox.shrink(),

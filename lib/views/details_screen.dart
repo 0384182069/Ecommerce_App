@@ -35,7 +35,7 @@ class _DetailsState extends State<Details> {
               child: const Icon(Icons.arrow_back_ios_new_outlined, color: Colors.black,),
             ),
             Image.asset(
-              "images/salad2.png",
+              "images/1-Fried-Chicken.png",
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.width/1.15,
               fit: BoxFit.fill,
@@ -46,8 +46,7 @@ class _DetailsState extends State<Details> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("Mediterranean", style: TextHelper.bodyTextStyle(),),
-                  Text("Chickpea Salad", style: TextHelper.bodyTextStyle(),),
+                  Text("1 Miếng Gà Rán", style: TextHelper.headerTextStyle(),)
                 ],
               ),
               const Spacer(),
@@ -65,7 +64,7 @@ class _DetailsState extends State<Details> {
                 ),
               ),
               const SizedBox(width: 10,),
-              Text(quantity.toString(),style: TextHelper.bodyTextStyle(),),
+              Text(quantity.toString(),style: TextHelper.headerTextStyle(),),
               const SizedBox(width: 10,),
               GestureDetector(
                 onTap: (){
@@ -81,16 +80,9 @@ class _DetailsState extends State<Details> {
             ],),
             const SizedBox(height: 10,),
             Text(
-              "A Mediterranean Chickpea Salad is a vibrant, healthy dish packed with fresh ingredients and bold flavors.",
+              "2 Miếng Gà Giòn Cay/Gà Truyền Thống/Gà Giòn Không Cay",
               style: TextHelper.subtitleTextStyle(),
             ),
-            Row(children: [
-              Text("Delivary Time", style: TextHelper.bodyTextStyle(),),
-              const SizedBox(width: 10,),
-              const Icon(Icons.alarm, color: Colors.black54,),
-              const SizedBox(width: 10,),
-              Text("30 min", style: TextHelper.bodyTextStyle(),),
-            ],),
             const Spacer(),
             Padding(
               padding: const EdgeInsets.only(bottom: 20),
@@ -100,16 +92,16 @@ class _DetailsState extends State<Details> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                  Text("Total Price", style: TextHelper.bodyTextStyle(),),
+                  Text("Total Price", style: TextHelper.headerTextStyle(),),
                   Text("\$28",style: TextHelper.headerTextStyle(),),
                 ],),
                 Container(
                   padding: const EdgeInsets.all(8),
                   decoration: BoxDecoration(color: Colors.black, borderRadius: BorderRadius.circular(8),),
-                  child: const Row(children: [
-                    Text("Add to cart",style: TextStyle(color: Colors.white, fontSize: 20, fontFamily: "Poppins")),
-                    SizedBox(width: 10,),
-                    Icon(Icons.add_shopping_cart,color: Colors.white, size: 30,),
+                  child: Row(children: [
+                    Text("Add to cart",style: TextHelper.headerTextStyle(color: Colors.white),),
+                    const SizedBox(width: 10,),
+                    const Icon(Icons.add_shopping_cart,color: Colors.white, size: 30,),
                   ],),
                 )
               ],),

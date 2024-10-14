@@ -7,14 +7,17 @@ import 'package:ecommerce_app/widgets/bottom_nav.dart';
 class LoginViewModel extends ChangeNotifier {
   final AuthMethods _authMethods = AuthMethods();
   bool _isSigningIn = false;
+  User? _user;
+
   bool get isSigningIn => _isSigningIn;
+  User? get user => _user;
 
   set setSigningIn(bool value) {
     _isSigningIn = value;
     notifyListeners();
   }
 
-  Future<void> userLogin({
+  Future<void> signInWithEmail({
     required String email, 
     required String password, 
     required BuildContext context,
@@ -33,6 +36,8 @@ class LoginViewModel extends ChangeNotifier {
       UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
       
       Navigator.of(context).pop(); 
+      _user = FirebaseAuth.instance.currentUser; 
+      
       Navigator.pushReplacement(
         context, 
         MaterialPageRoute(builder: (context) => const BottomNav())
@@ -70,7 +75,7 @@ class LoginViewModel extends ChangeNotifier {
     UserCredential? result = await _authMethods.signInWithGoogle();
 
     if (result != null) {
-      // Chuyển hướng đến trang chính sau khi đăng nhập thành công
+      _user = FirebaseAuth.instance.currentUser;
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => const BottomNav()),

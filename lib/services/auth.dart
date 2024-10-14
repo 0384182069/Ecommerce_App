@@ -5,19 +5,17 @@ import 'package:google_sign_in/google_sign_in.dart';
 class AuthMethods {
   final FirebaseAuth auth = FirebaseAuth.instance;
 
-  // Lấy thông tin người dùng hiện tại
   User? getCurrentUser() {
     return auth.currentUser;
   }
 
-  // Đăng nhập bằng Google
+
   Future<UserCredential?> signInWithGoogle() async {
     try {
       final GoogleSignIn googleSignIn = GoogleSignIn();
       final GoogleSignInAccount? googleSignInAccount = await googleSignIn.signIn();
 
       if (googleSignInAccount == null) {
-        // Người dùng hủy quá trình đăng nhập
         return null;
       }
 

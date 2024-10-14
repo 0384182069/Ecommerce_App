@@ -1,13 +1,9 @@
 
 import 'package:ecommerce_app/utils/text_helper.dart';
-import 'package:ecommerce_app/utils/toast_helper.dart';
 import 'package:ecommerce_app/view_models/login_view_model.dart';
-import 'package:ecommerce_app/widgets/bottom_nav.dart';
 import 'package:ecommerce_app/widgets/text_form_field.dart';
 import 'package:ecommerce_app/views/forgotpassword_screen.dart';
 import 'package:ecommerce_app/views/register_screen.dart';
-import 'package:ecommerce_app/services/auth.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -75,7 +71,7 @@ class _LoginState extends State<Login> {
                       elevation: 5.0,
                       borderRadius: BorderRadius.circular(20),
                       child: Container(
-                        width: MediaQuery.of(context).size.width/1.2,
+                        width: MediaQuery.of(context).size.width/1.1,
                         height: MediaQuery.of(context).size.height/2.2,
                         decoration: BoxDecoration(color: Colors.white,borderRadius: BorderRadius.circular(20)),
                         child: Column(children: [
@@ -125,7 +121,7 @@ class _LoginState extends State<Login> {
                                 email = emailController.text.trim();
                                 password = passwordController.text.trim();
 
-                                loginViewModel.userLogin(
+                                loginViewModel.signInWithEmail(
                                   email: email,
                                   password: password,
                                   context: context,

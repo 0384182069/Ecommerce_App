@@ -31,6 +31,12 @@ class _RegisterState extends State<Register> {
         });
 
         UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email, password: password);
+        User? user = userCredential.user;
+        
+        if(user != null){
+          await user.updateDisplayName(username);
+          await user.reload();
+        }
         Navigator.of(context).pop();
 
         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const BottomNav()));
@@ -99,7 +105,7 @@ class _RegisterState extends State<Register> {
                     elevation: 5.0,
                     borderRadius: BorderRadius.circular(20),
                     child: Container(
-                      width: MediaQuery.of(context).size.width/1.2,
+                      width: MediaQuery.of(context).size.width/1.1,
                       height: MediaQuery.of(context).size.height/1.7,
                       decoration: BoxDecoration(color: Colors.white,borderRadius: BorderRadius.circular(20)),
                       child: Form(
