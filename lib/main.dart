@@ -1,5 +1,5 @@
-import 'package:ecommerce_app/view_models/login_view_model.dart';
-import 'package:ecommerce_app/views/login_screen.dart';
+import 'package:ecommerce_app/view_models/auth_view_model.dart';
+import 'package:ecommerce_app/views/login_view.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +22,7 @@ void main() async{
   }
   runApp( MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => LoginViewModel()),
+        ChangeNotifierProvider(create: (_) => AuthViewModel()),
       ],
       child: const MyApp(),
     ),);
