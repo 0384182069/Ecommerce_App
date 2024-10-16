@@ -73,7 +73,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(20),
                       ),
-                      child: Center(child: Text("Send Email",style: TextHelper.bodyTextStyle(),)),
+                      child: Center(child: Text("Send Email",style: TextHelper.bodyTextStyle(context),)),
                     ),
                     const SizedBox(height: 50,),
                     Row(

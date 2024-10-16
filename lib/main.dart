@@ -1,4 +1,5 @@
 import 'package:ecommerce_app/view_models/auth_view_model.dart';
+import 'package:ecommerce_app/view_models/themma_view_model.dart';
 import 'package:ecommerce_app/views/login_view.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
@@ -23,6 +24,7 @@ void main() async{
   runApp( MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => AuthViewModel()),
+        ChangeNotifierProvider(create: (_) => ThemeViewModel()),
       ],
       child: const MyApp(),
     ),);
@@ -33,10 +35,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    final themeViewModel = Provider.of<ThemeViewModel>(context);
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: themeViewModel.currentTheme,
       title: 'SPEEDYEATS',
-      home: Login(),
+      home: const Login(),
     );
   }
 }

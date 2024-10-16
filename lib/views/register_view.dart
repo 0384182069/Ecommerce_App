@@ -1,12 +1,8 @@
-
 import 'package:ecommerce_app/utils/text_helper.dart';
-import 'package:ecommerce_app/utils/toast_helper.dart';
 import 'package:ecommerce_app/view_models/auth_view_model.dart';
-import 'package:ecommerce_app/widgets/bottom_nav.dart';
 import 'package:ecommerce_app/widgets/text_form_field.dart';
 import 'package:ecommerce_app/views/login_view.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
 
 class Register extends StatefulWidget {
@@ -79,7 +75,7 @@ class _RegisterState extends State<Register> {
                         key: _formkey,
                         child: Column(children: [
                           const SizedBox(height: 20,),
-                          Text("Register",style: TextHelper.headerTextStyle(),),
+                          Text("Register",style: TextHelper.headerTextStyle(context),),
                           const SizedBox(height: 20,),
                           MyTextfield(
                             validatar: (value){

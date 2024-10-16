@@ -2,6 +2,7 @@
 import 'package:ecommerce_app/utils/text_helper.dart';
 import 'package:ecommerce_app/view_models/auth_view_model.dart';
 import 'package:ecommerce_app/view_models/auth_view_model.dart';
+import 'package:ecommerce_app/view_models/themma_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -17,6 +18,7 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
+    final themeViewModel = Provider.of<ThemeViewModel>(context);
     final authViewModel = Provider.of<AuthViewModel>(context);
     final user = authViewModel.user;
     final List<String> listProfile = [
@@ -33,7 +35,7 @@ class _ProfileState extends State<Profile> {
               height: MediaQuery.of(context).size.height/4.2,
               width: MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
-                color: Colors.black,
+                color: Theme.of(context).primaryColor,
                 borderRadius: BorderRadius.vertical(
                   bottom: Radius.elliptical(MediaQuery.of(context).size.width,110),
                 )
@@ -64,18 +66,78 @@ class _ProfileState extends State<Profile> {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 70),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                Text("${user?.displayName}", style: TextHelper.headerTextStyle(color: Colors.white),)
-                ],
-              ),
-            ),
           ],
         ),
-        ListView()
+        Expanded(
+          child: ListView(
+            padding: const EdgeInsets.only(top: 50, left: 15, right: 15),
+            children: [
+              Material(
+                color: Theme.of(context).cardColor,
+                elevation: 5,
+                borderRadius: BorderRadius.circular(10),
+                child: Container(
+                  padding: const EdgeInsets.all(15),
+                  child: Row(children: [
+                    const Icon(Icons.person, size: 30,),
+                    const SizedBox(width: 15,),
+                    Text("Infomation", style: TextHelper.bodyTextStyle(context),),
+                  ],),
+                ),
+              ),
+              const SizedBox(height: 20,),
+              Material(
+                color: Theme.of(context).cardColor,
+                elevation: 5,
+                borderRadius: BorderRadius.circular(10),
+                child: Container(
+                  padding: const EdgeInsets.all(15),
+                  child: Row(children: [
+                    const Icon(Icons.security, size: 30,),
+                    const SizedBox(width: 15,),
+                    Text("Security", style: TextHelper.bodyTextStyle(context),),
+                  ],),
+                ),
+              ),
+              const SizedBox(height: 20,),
+              Material(
+                color: Theme.of(context).cardColor,
+                elevation: 5,
+                borderRadius: BorderRadius.circular(10),
+                child: Container(
+                  padding: const EdgeInsets.all(15),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [Row(children: [
+                      Icon(themeViewModel.isDarkTheme ? Icons.dark_mode : Icons.light_mode,),
+                      const SizedBox(width: 15,),
+                      Text("Themme", style: TextHelper.bodyTextStyle(context),),
+                      ],
+                    ),
+                    Switch(value: themeViewModel.isDarkTheme, 
+                        onChanged: (value) {
+                        themeViewModel.toggleTheme(); })
+                    ]
+                  ),
+                ),
+              ),
+              const SizedBox(height: 20,),
+              Material(
+                color: Theme.of(context).cardColor,
+                elevation: 5,
+                borderRadius: BorderRadius.circular(10),
+                child: Container(
+                  padding: const EdgeInsets.all(15),
+                  child: Row(children: [
+                    const Icon(Icons.logout, size: 30,),
+                    const SizedBox(width: 15,),
+                    Text("LogOut", style: TextHelper.bodyTextStyle(context),),
+                  ],),
+                ),
+              ),
+            ],
+          ),
+        ),
         ],),
       ),
     );

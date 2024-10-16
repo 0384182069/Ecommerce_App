@@ -76,7 +76,7 @@ class _LoginState extends State<Login> {
                         decoration: BoxDecoration(color: Colors.white,borderRadius: BorderRadius.circular(20)),
                         child: Column(children: [
                           const SizedBox(height: 20,),
-                          Text("Login",style: TextHelper.headerTextStyle(),),
+                          Text("Login",style: TextHelper.headerTextStyle(context),),
                           const SizedBox(height: 20,),
                           MyTextfield(
                             validatar: (value){

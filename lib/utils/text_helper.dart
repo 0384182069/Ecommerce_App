@@ -2,27 +2,27 @@ import 'package:flutter/material.dart';
 
 class TextHelper {
 
-  static TextStyle headerTextStyle({Color color = Colors.black}) {
+  static TextStyle headerTextStyle(BuildContext context) {
     return TextStyle(
-      color: color,
+      color: Theme.of(context).textTheme.bodyLarge?.color ?? Colors.black,
       fontSize: 22,
       fontWeight: FontWeight.bold,
       fontFamily: "Poppins",
     );
   }
 
-  static TextStyle subtitleTextStyle({Color color = Colors.black38}) {
-    return TextStyle(
-      color: color,
+  static TextStyle subtitleTextStyle() {
+    return const TextStyle(
+      color: Colors.grey,
       fontSize: 15,
       fontWeight: FontWeight.w500,
       fontFamily: "Poppins",
     );
   }
 
-  static TextStyle bodyTextStyle({Color color = Colors.black}) {
+  static TextStyle bodyTextStyle(BuildContext context) {
     return TextStyle(
-      color: color,
+      color: Theme.of(context).textTheme.bodyMedium?.color ?? Colors.black,
       fontSize: 18,
       fontWeight: FontWeight.w800,
       fontFamily: "Poppins",

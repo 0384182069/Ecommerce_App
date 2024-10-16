@@ -32,7 +32,7 @@ class _DetailsState extends State<Details> {
               onTap: (){
                 Navigator.pop(context);
               },
-              child: const Icon(Icons.arrow_back_ios_new_outlined, color: Colors.black,),
+              child: Icon(Icons.arrow_back_ios_new_outlined, color: Theme.of(context).colorScheme.onSecondary,),
             ),
             Image.asset(
               "images/1-Fried-Chicken.png",
@@ -46,7 +46,7 @@ class _DetailsState extends State<Details> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("1 Miếng Gà Rán", style: TextHelper.headerTextStyle(),)
+                  Text("1 Miếng Gà Rán", style: TextHelper.headerTextStyle(context),)
                 ],
               ),
               const Spacer(),
@@ -59,12 +59,14 @@ class _DetailsState extends State<Details> {
                   });
                 },
                 child: Container(
-                  decoration: BoxDecoration(color: Colors.black,borderRadius: BorderRadius.circular(8)),
-                  child: const Icon(Icons.remove, color: Colors.white,),
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.secondary,
+                    borderRadius: BorderRadius.circular(8)),
+                  child: Icon(Icons.remove,color: Theme.of(context).colorScheme.onSecondary),
                 ),
               ),
               const SizedBox(width: 10,),
-              Text(quantity.toString(),style: TextHelper.headerTextStyle(),),
+              Text(quantity.toString(),style: TextHelper.headerTextStyle(context),),
               const SizedBox(width: 10,),
               GestureDetector(
                 onTap: (){
@@ -73,8 +75,10 @@ class _DetailsState extends State<Details> {
                   });
                 },
                 child: Container(
-                  decoration: BoxDecoration(color: Colors.black,borderRadius: BorderRadius.circular(8)),
-                  child: const Icon(Icons.add, color: Colors.white,),
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.secondary,
+                    borderRadius: BorderRadius.circular(8)),
+                  child: Icon(Icons.add,color: Theme.of(context).colorScheme.onSecondary),
                 ),
               ),
             ],),
@@ -92,16 +96,18 @@ class _DetailsState extends State<Details> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                  Text("Total Price", style: TextHelper.headerTextStyle(),),
-                  Text("\$28",style: TextHelper.headerTextStyle(),),
+                  Text("Total Price", style: TextHelper.headerTextStyle(context),),
+                  Text("\$28",style: TextHelper.headerTextStyle(context),),
                 ],),
                 Container(
                   padding: const EdgeInsets.all(8),
-                  decoration: BoxDecoration(color: Colors.black, borderRadius: BorderRadius.circular(8),),
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.secondary,
+                    borderRadius: BorderRadius.circular(8),),
                   child: Row(children: [
-                    Text("Add to cart",style: TextHelper.headerTextStyle(color: Colors.white),),
+                    Text("Add to cart",style: TextHelper.headerTextStyle(context),),
                     const SizedBox(width: 10,),
-                    const Icon(Icons.add_shopping_cart,color: Colors.white, size: 30,),
+                    Icon(Icons.add_shopping_cart, color: Theme.of(context).colorScheme.onSecondary,size: 30,),
                   ],),
                 )
               ],),

@@ -31,7 +31,7 @@ class _MyTextfieldState extends State<MyTextfield> {
                 validator: widget.validatar,
                 controller: widget.controller,
                 obscureText: widget.isPasswordField? _isObscure: false,
-                style: TextHelper.bodyTextStyle(),
+                style: TextHelper.bodyTextStyle(context),
                 decoration: InputDecoration(
                 hintStyle: TextHelper.subtitleTextStyle(),
                 hintText: widget.hintText,

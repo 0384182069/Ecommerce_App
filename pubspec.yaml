@@ -72,7 +72,7 @@ flutter:
   assets:
     - images/chicken.png
     - images/pizza.png
-    - images/salad.png
+    - images/combo.png
     - images/burger.png
     - images/logo.png
     - images/google.png

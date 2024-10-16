@@ -12,7 +12,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  bool icecream = false, pizza = false, salad = false, burger = false;
+  bool chicken = false, pizza = false, combo = false, burger = false;
   
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class _HomeState extends State<Home> {
         children: [
         Text(
           "Hello ${user?.displayName}",
-          style: TextHelper.bodyTextStyle(),
+          style: TextHelper.bodyTextStyle(context),
         ),
         Container(
           padding: const EdgeInsets.all(5),
@@ -44,7 +44,7 @@ class _HomeState extends State<Home> {
     ),
     Text(
       "Delicious food",
-      style: TextHelper.headerTextStyle(),
+      style: TextHelper.headerTextStyle(context),
     ),
     Text(
       "Discover and get food",
@@ -68,7 +68,7 @@ class _HomeState extends State<Home> {
               ),
             ),
           ),
-          const SizedBox(width: 10,),
+          const SizedBox(width: 5,),
           Material(
             elevation: 5,
             borderRadius: BorderRadius.circular(25),
@@ -84,60 +84,60 @@ class _HomeState extends State<Home> {
         ],)
     ),
     const SizedBox(height: 10),
-    Container(
-      padding: const EdgeInsets.all(5),
-      child: IntrinsicHeight(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-           GestureDetector(
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => const Details()));
-            },
-             child: Material(
-              elevation: 5,
-              borderRadius: BorderRadius.circular(25),
-              child: Padding(
-                padding: const EdgeInsets.all(5),
-                child: Column(
-                  children: [
-                    Image.asset("images/1-Fried-Chicken.png",width: 165,height: 165,fit: BoxFit.cover,),
-                    SizedBox(
-                      width: 160,
-                      child: Text(
-                        "1 Miếng Gà Rán",
-                        style: TextHelper.bodyTextStyle(), 
-                        textAlign: TextAlign.center,
-                        softWrap: true,
-                      )
-                    )
-                  ],
-                ),
-              ),
-             ),
-           ),
-            Material(
+    IntrinsicHeight(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+         GestureDetector(
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) => const Details()));
+          },
+           child: Material(
+            color: Theme.of(context).cardColor,
             elevation: 5,
             borderRadius: BorderRadius.circular(25),
-            child: Padding(padding: EdgeInsets.all(5),
+            child: Padding(
+              padding: const EdgeInsets.only(left: 8, right: 8, bottom: 20),
               child: Column(
                 children: [
-                  Image.asset("images/2-Fried-Chicken.png",width: 165,height: 165,fit: BoxFit.cover,),
+                  Image.asset("images/1-Fried-Chicken.png",width: 165,height: 165,fit: BoxFit.cover,),
                   SizedBox(
                     width: 160,
                     child: Text(
-                      "2 Miếng Gà Giòn",
-                      style: TextHelper.bodyTextStyle(), 
+                      "1 Miếng Gà Rán",
+                      style: TextHelper.bodyTextStyle(context), 
                       textAlign: TextAlign.center,
                       softWrap: true,
-                    )
-                  )
+                    ),
+                  ),
                 ],
               ),
             ),
            ),
-          ],
-        ),
+         ),
+          Material(
+          color: Theme.of(context).cardColor,
+          elevation: 5,
+          borderRadius: BorderRadius.circular(25),
+          child: Padding(
+            padding: const EdgeInsets.only(left: 8, right: 8, bottom: 20),
+            child: Column(
+              children: [
+                Image.asset("images/2-Fried-Chicken.png",width: 165,height: 165,fit: BoxFit.cover,),
+                SizedBox(
+                  width: 160,
+                  child: Text(
+                    "2 Miếng Gà Giòn",
+                    style: TextHelper.bodyTextStyle(context), 
+                    textAlign: TextAlign.center,
+                    softWrap: true,
+                  )
+                )
+              ],
+            ),
+          ),
+         ),
+        ],
       ),
     ),
   ],
@@ -152,9 +152,9 @@ class _HomeState extends State<Home> {
               GestureDetector(
                 onTap: (){
                   setState(() {
-                    icecream = true;
+                    chicken = true;
                     pizza = false;
-                    salad = false;
+                    combo = false;
                     burger = false;
                   });
                 },
@@ -163,22 +163,26 @@ class _HomeState extends State<Home> {
                   borderRadius: BorderRadius.circular(10),
                   child: Container(
                     decoration: BoxDecoration(
-                      color: icecream?Colors.black: Colors.white,
+                      color: chicken?
+                        Theme.of(context).primaryColor:
+                        Theme.of(context).cardColor,
                       borderRadius: BorderRadius.circular(10)),
                     padding: const EdgeInsets.all(10),
                     child: Image.asset("images/chicken.png",
                       height: 50,width: 50,
                       fit: BoxFit.cover,
-                      color: icecream?Colors.white: Colors.black,),
+                      color: chicken?
+                        Theme.of(context).colorScheme.onPrimary:
+                        Theme.of(context).colorScheme.primary),
                   ),
                 ),
               ),
               GestureDetector(
                 onTap: (){
                   setState(() {
-                    icecream = false;
+                    chicken = false;
                     pizza = true;
-                    salad = false;
+                    combo = false;
                     burger = false;
                   });
                 },
@@ -187,46 +191,26 @@ class _HomeState extends State<Home> {
                   borderRadius: BorderRadius.circular(10),
                   child: Container(
                     decoration: BoxDecoration(
-                      color: pizza?Colors.black: Colors.white,
+                      color: pizza?
+                        Theme.of(context).primaryColor:
+                        Theme.of(context).cardColor,
                       borderRadius: BorderRadius.circular(10)),
                     padding: const EdgeInsets.all(10),
                     child: Image.asset("images/pizza.png",
                     height: 50,width: 50,
                     fit: BoxFit.cover,
-                    color: pizza?Colors.white: Colors.black,),
+                    color: pizza?
+                      Theme.of(context).colorScheme.onPrimary:
+                      Theme.of(context).colorScheme.primary),
                   ),
                 ),
               ),
               GestureDetector(
                 onTap: (){
                   setState(() {
-                    icecream = false;
+                    chicken = false;
                     pizza = false;
-                    salad = true;
-                    burger = false;
-                  });
-                },
-                child: Material(
-                  elevation: 5,
-                  borderRadius: BorderRadius.circular(10),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: salad?Colors.black: Colors.white,
-                      borderRadius: BorderRadius.circular(10)),
-                    padding: const EdgeInsets.all(10),
-                    child: Image.asset("images/salad.png",
-                    height: 50,width: 50,
-                    fit: BoxFit.cover,
-                    color: salad?Colors.white: Colors.black,),
-                  ),
-                ),
-              ),
-              GestureDetector(
-                onTap: (){
-                  setState(() {
-                    icecream = false;
-                    pizza = false;
-                    salad = false;
+                    combo = false;
                     burger = true;
                   });
                 },
@@ -234,14 +218,46 @@ class _HomeState extends State<Home> {
                   elevation: 5,
                   borderRadius: BorderRadius.circular(10),
                   child: Container(
-                     decoration: BoxDecoration(
-                      color: burger?Colors.black: Colors.white,
+                    decoration: BoxDecoration(
+                      color: burger?                        
+                        Theme.of(context).primaryColor:
+                        Theme.of(context).cardColor,
                       borderRadius: BorderRadius.circular(10)),
                     padding: const EdgeInsets.all(10),
                     child: Image.asset("images/burger.png",
                     height: 50,width: 50,
                     fit: BoxFit.cover,
-                    color: burger?Colors.white: Colors.black,),
+                    color: burger?
+                      Theme.of(context).colorScheme.onPrimary:
+                      Theme.of(context).colorScheme.primary),
+                  ),
+                ),
+              ),
+              GestureDetector(
+                onTap: (){
+                  setState(() {
+                    chicken = false;
+                    pizza = false;
+                    combo = true;
+                    burger = false;
+                  });
+                },
+                child: Material(
+                  elevation: 5,
+                  borderRadius: BorderRadius.circular(10),
+                  child: Container(
+                     decoration: BoxDecoration(
+                      color: combo?
+                        Theme.of(context).primaryColor:
+                        Theme.of(context).cardColor,
+                      borderRadius: BorderRadius.circular(10)),
+                    padding: const EdgeInsets.all(10),
+                    child: Image.asset("images/combo.png",
+                    height: 50,width: 50,
+                    fit: BoxFit.cover,
+                    color: combo?
+                      Theme.of(context).colorScheme.onPrimary:
+                      Theme.of(context).colorScheme.primary),
                   ),
                 ),
               ),

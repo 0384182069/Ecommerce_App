@@ -70,17 +70,25 @@ class AuthViewModel extends ChangeNotifier {
 
   Future<void> signInWithGoogle(BuildContext context) async {
     setSigningIn = true;
+    showDialog(
+      context: context,
+      builder: (context) {
+        return const Center(child: CircularProgressIndicator());
+      },
+    );
 
     UserCredential? result = await _authMethods.signInWithGoogle();
 
     if (result != null) {
       _user = FirebaseAuth.instance.currentUser;
+      Navigator.of(context).pop();
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => const BottomNav()),
       );
       ToastHelper.showToast("Login Successfully!", Colors.green);
     } else {
+      Navigator.of(context).pop();
       ToastHelper.showToast("Google Sign-In Failed", Colors.red);
     }
     setSigningIn = false;
