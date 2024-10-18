@@ -111,7 +111,7 @@ class _ProfileState extends State<Profile> {
                     children: [Row(children: [
                       Icon(themeViewModel.isDarkTheme ? Icons.dark_mode : Icons.light_mode,),
                       const SizedBox(width: 15,),
-                      Text("Themme", style: TextHelper.bodyTextStyle(context),),
+                      Text("Light/Dark", style: TextHelper.bodyTextStyle(context),),
                       ],
                     ),
                     Switch(value: themeViewModel.isDarkTheme, 

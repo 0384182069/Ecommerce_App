@@ -172,8 +172,8 @@ class _HomeState extends State<Home> {
                       height: 50,width: 50,
                       fit: BoxFit.cover,
                       color: chicken?
-                        Theme.of(context).colorScheme.onPrimary:
-                        Theme.of(context).colorScheme.primary),
+                        Theme.of(context).colorScheme.primary:
+                        Theme.of(context).colorScheme.onPrimary),
                   ),
                 ),
               ),
@@ -200,8 +200,8 @@ class _HomeState extends State<Home> {
                     height: 50,width: 50,
                     fit: BoxFit.cover,
                     color: pizza?
-                      Theme.of(context).colorScheme.onPrimary:
-                      Theme.of(context).colorScheme.primary),
+                      Theme.of(context).colorScheme.primary:
+                      Theme.of(context).colorScheme.onPrimary),
                   ),
                 ),
               ),
@@ -228,8 +228,8 @@ class _HomeState extends State<Home> {
                     height: 50,width: 50,
                     fit: BoxFit.cover,
                     color: burger?
-                      Theme.of(context).colorScheme.onPrimary:
-                      Theme.of(context).colorScheme.primary),
+                      Theme.of(context).colorScheme.primary:
+                      Theme.of(context).colorScheme.onPrimary),
                   ),
                 ),
               ),
@@ -256,8 +256,8 @@ class _HomeState extends State<Home> {
                     height: 50,width: 50,
                     fit: BoxFit.cover,
                     color: combo?
-                      Theme.of(context).colorScheme.onPrimary:
-                      Theme.of(context).colorScheme.primary),
+                      Theme.of(context).colorScheme.primary:
+                      Theme.of(context).colorScheme.onPrimary),
                   ),
                 ),
               ),

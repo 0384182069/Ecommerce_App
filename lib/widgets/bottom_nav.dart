@@ -28,7 +28,7 @@ class _BottomNavState extends State<BottomNav> {
     walletPage = const Wallet();
     profilePage = const Profile();
     orderPage = const Order();
-    pages = [homePage, walletPage, orderPage, profilePage];
+    pages = [homePage, orderPage, walletPage, profilePage];
     super.initState();
   }
 

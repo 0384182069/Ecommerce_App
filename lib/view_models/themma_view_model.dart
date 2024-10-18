@@ -18,12 +18,12 @@ class ThemeViewModel with ChangeNotifier {
     brightness: Brightness.light,
     primaryColor: Colors.black,
     scaffoldBackgroundColor: Colors.white, 
-    cardColor: Colors.orange,
+    cardColor: Colors.white,
     canvasColor: Colors.black,
 
     colorScheme: const ColorScheme.light(
-      primary: Colors.black,
-      onPrimary: Colors.white,
+      primary: Colors.white,
+      onPrimary: Colors.black,
       secondary: Colors.orange,
       onSecondary: Colors.black,
       surface: Colors.white,
@@ -44,13 +44,14 @@ class ThemeViewModel with ChangeNotifier {
     cardColor: Colors.grey.shade800,
     canvasColor: Colors.grey.shade800,
 
-    colorScheme: ColorScheme.dark(
-      primary: Colors.white,
-      onPrimary: Colors.black,
-      secondary: Colors.grey.shade800,
+    colorScheme: const ColorScheme.dark(
+      primary: Colors.black,
+      onPrimary: Colors.white,
+      secondary: Colors.orange,
       onSecondary: Colors.white,
       surface: Colors.white,
       onSurface: Colors.black,
+
     ),
 
     textTheme: const TextTheme(

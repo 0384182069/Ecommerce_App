@@ -5,7 +5,7 @@ class TextHelper {
   static TextStyle headerTextStyle(BuildContext context) {
     return TextStyle(
       color: Theme.of(context).textTheme.bodyLarge?.color ?? Colors.black,
-      fontSize: 22,
+      fontSize: 25,
       fontWeight: FontWeight.bold,
       fontFamily: "Poppins",
     );
@@ -14,7 +14,7 @@ class TextHelper {
   static TextStyle subtitleTextStyle() {
     return const TextStyle(
       color: Colors.grey,
-      fontSize: 15,
+      fontSize: 17,
       fontWeight: FontWeight.w500,
       fontFamily: "Poppins",
     );
@@ -23,7 +23,7 @@ class TextHelper {
   static TextStyle bodyTextStyle(BuildContext context) {
     return TextStyle(
       color: Theme.of(context).textTheme.bodyMedium?.color ?? Colors.black,
-      fontSize: 18,
+      fontSize: 20,
       fontWeight: FontWeight.w800,
       fontFamily: "Poppins",
     );
