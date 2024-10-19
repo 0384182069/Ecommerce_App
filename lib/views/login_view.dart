@@ -62,7 +62,7 @@ class _LoginState extends State<Login> {
                 margin: const EdgeInsets.only(top: 10),
                 child: Column(children: [
                   Center(
-                    child: Image.asset("images/logo.png",width: MediaQuery.of(context).size.width/2, fit: BoxFit.cover,),
+                    child: Image.asset("assets/images/logo.png",width: MediaQuery.of(context).size.width/2, fit: BoxFit.cover,),
                   ),
                   const SizedBox(height: 10,),
                   Form(
@@ -192,7 +192,7 @@ class _LoginState extends State<Login> {
                               color: Colors.white,
                             ),
                             height: 60,
-                            child: Image.asset("images/google.png"),
+                            child: Image.asset("assets/images/google.png"),
                           ),
                         ),
                       ),
@@ -208,7 +208,7 @@ class _LoginState extends State<Login> {
                             color: Color(0xFF3D5B99),
                           ),
                           height: 60,
-                          child: Image.asset("images/facebook.png"),
+                          child: Image.asset("assets/images/facebook.png"),
                         ),
                       ),
                   ],),

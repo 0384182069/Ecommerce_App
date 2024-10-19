@@ -44,6 +44,8 @@ dependencies:
   google_sign_in: ^6.2.1
   provider: ^6.1.2
   flutter_dotenv: ^5.2.1
+  flutter_stripe: ^11.2.0
+  http: ^1.2.2
 
 
 
@@ -71,20 +73,20 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - images/chicken.png
-    - images/pizza.png
-    - images/combo.png
-    - images/burger.png
-    - images/logo.png
-    - images/google.png
-    - images/facebook.png
-    - images/emty-avatar.png
-    - images/banner1.png
-    - images/banner2.png
-    - images/1-Fried-Chicken.png
-    - images/2-Fried-Chicken.png
-    - images/wallet.png
-  #   - images/a_dot_ham.jpeg
+    - assets/images/chicken.png
+    - assets/images/pizza.png
+    - assets/images/combo.png
+    - assets/images/burger.png
+    - assets/images/logo.png
+    - assets/images/google.png
+    - assets/images/facebook.png
+    - assets/images/emty-avatar.png
+    - assets/images/banner1.png
+    - assets/images/banner2.png
+    - assets/images/1-Fried-Chicken.png
+    - assets/images/2-Fried-Chicken.png
+    - assets/images/wallet.png
+    - assets/.env
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

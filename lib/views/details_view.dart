@@ -35,7 +35,7 @@ class _DetailsState extends State<Details> {
               child: Icon(Icons.arrow_back_ios_new_outlined, color: Theme.of(context).colorScheme.onSecondary,),
             ),
             Image.asset(
-              "images/1-Fried-Chicken.png",
+              "assets/images/1-Fried-Chicken.png",
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.width/1.15,
               fit: BoxFit.fill,

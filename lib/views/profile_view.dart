@@ -1,7 +1,6 @@
 
 import 'package:ecommerce_app/utils/text_helper.dart';
 import 'package:ecommerce_app/view_models/auth_view_model.dart';
-import 'package:ecommerce_app/view_models/auth_view_model.dart';
 import 'package:ecommerce_app/view_models/themma_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -24,7 +23,7 @@ class _ProfileState extends State<Profile> {
     final List<String> listProfile = [
     user?.displayName??"No Name", 
     user?.email??"No email",
-    user?.photoURL?? "images/emty-avatar.png"
+    user?.photoURL?? "assets/images/emty-avatar.png"
     ];
     return Scaffold(
       body: Container(

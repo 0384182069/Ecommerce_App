@@ -1,13 +1,19 @@
 import 'package:ecommerce_app/view_models/auth_view_model.dart';
+import 'package:ecommerce_app/view_models/payment_view_model.dart';
 import 'package:ecommerce_app/view_models/themma_view_model.dart';
 import 'package:ecommerce_app/views/login_view.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:provider/provider.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load(fileName: "assets/.env");
+  Stripe.publishableKey = "pk_test_51QBAPpGKafNZFZSX6e9PnCFBV5PdH04PXaRyvHYYMAjSeSzp7iEgOk53VfvXuOTpsLP5ske5HpRXvMdmCKRHKl3d00FAyq4WE6";
+  
   if(kIsWeb){
     await Firebase.initializeApp(
       options: const FirebaseOptions( 
@@ -21,10 +27,12 @@ void main() async{
   }else{
     await Firebase.initializeApp();
   }
+
   runApp( MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => AuthViewModel()),
         ChangeNotifierProvider(create: (_) => ThemeViewModel()),
+        ChangeNotifierProvider(create: (_) => PaymentViewModel()),
       ],
       child: const MyApp(),
     ),);

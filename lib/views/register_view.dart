@@ -61,7 +61,7 @@ class _RegisterState extends State<Register> {
                 margin: const EdgeInsets.only(top: 10),
                 child: Column(children: [
                   Center(
-                    child: Image.asset("images/logo.png",width: MediaQuery.of(context).size.width/2, fit: BoxFit.cover,),
+                    child: Image.asset("assets/images/logo.png",width: MediaQuery.of(context).size.width/2, fit: BoxFit.cover,),
                   ),
                   const SizedBox(height: 10,),
                   Material(

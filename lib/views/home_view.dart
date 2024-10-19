@@ -14,6 +14,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   bool chicken = false, pizza = false, combo = false, burger = false;
   
+  
   @override
   Widget build(BuildContext context) {
     final authViewModel = Provider.of<AuthViewModel>(context);
@@ -64,7 +65,7 @@ class _HomeState extends State<Home> {
               child: Container(
                 width: 320,
                 height: 180,
-                child: Image.asset("images/banner1.png", fit: BoxFit.cover,),
+                child: Image.asset("assets/images/banner1.png", fit: BoxFit.cover,),
               ),
             ),
           ),
@@ -77,7 +78,7 @@ class _HomeState extends State<Home> {
               child: Container(
                 width: 320,
                 height: 180,
-                child: Image.asset("images/banner2.png", fit: BoxFit.cover,),
+                child: Image.asset("assets/images/banner2.png", fit: BoxFit.cover,),
               ),
             ),
           ),
@@ -100,7 +101,7 @@ class _HomeState extends State<Home> {
               padding: const EdgeInsets.only(left: 8, right: 8, bottom: 20),
               child: Column(
                 children: [
-                  Image.asset("images/1-Fried-Chicken.png",width: 165,height: 165,fit: BoxFit.cover,),
+                  Image.asset("assets/images/1-Fried-Chicken.png",width: 165,height: 165,fit: BoxFit.cover,),
                   SizedBox(
                     width: 160,
                     child: Text(
@@ -123,7 +124,7 @@ class _HomeState extends State<Home> {
             padding: const EdgeInsets.only(left: 8, right: 8, bottom: 20),
             child: Column(
               children: [
-                Image.asset("images/2-Fried-Chicken.png",width: 165,height: 165,fit: BoxFit.cover,),
+                Image.asset("assets/images/2-Fried-Chicken.png",width: 165,height: 165,fit: BoxFit.cover,),
                 SizedBox(
                   width: 160,
                   child: Text(
@@ -168,7 +169,7 @@ class _HomeState extends State<Home> {
                         Theme.of(context).cardColor,
                       borderRadius: BorderRadius.circular(10)),
                     padding: const EdgeInsets.all(10),
-                    child: Image.asset("images/chicken.png",
+                    child: Image.asset("assets/images/chicken.png",
                       height: 50,width: 50,
                       fit: BoxFit.cover,
                       color: chicken?
@@ -196,7 +197,7 @@ class _HomeState extends State<Home> {
                         Theme.of(context).cardColor,
                       borderRadius: BorderRadius.circular(10)),
                     padding: const EdgeInsets.all(10),
-                    child: Image.asset("images/pizza.png",
+                    child: Image.asset("assets/images/pizza.png",
                     height: 50,width: 50,
                     fit: BoxFit.cover,
                     color: pizza?
@@ -224,7 +225,7 @@ class _HomeState extends State<Home> {
                         Theme.of(context).cardColor,
                       borderRadius: BorderRadius.circular(10)),
                     padding: const EdgeInsets.all(10),
-                    child: Image.asset("images/burger.png",
+                    child: Image.asset("assets/images/burger.png",
                     height: 50,width: 50,
                     fit: BoxFit.cover,
                     color: burger?
@@ -252,7 +253,7 @@ class _HomeState extends State<Home> {
                         Theme.of(context).cardColor,
                       borderRadius: BorderRadius.circular(10)),
                     padding: const EdgeInsets.all(10),
-                    child: Image.asset("images/combo.png",
+                    child: Image.asset("assets/images/combo.png",
                     height: 50,width: 50,
                     fit: BoxFit.cover,
                     color: combo?

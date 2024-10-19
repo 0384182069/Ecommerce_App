@@ -1,4 +1,4 @@
-import 'package:ecommerce_app/services/auth.dart';
+import 'package:ecommerce_app/services/auth_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:ecommerce_app/utils/toast_helper.dart';
