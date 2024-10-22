@@ -1,4 +1,6 @@
+import 'package:ecommerce_app/services/cloud_store.dart';
 import 'package:ecommerce_app/utils/text_helper.dart';
+import 'package:ecommerce_app/view_models/auth_view_model.dart';
 import 'package:ecommerce_app/view_models/payment_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart'; 
@@ -15,7 +17,8 @@ class _WalletState extends State<Wallet> {
   @override
   Widget build(BuildContext context) {
     final paymentViewModel = Provider.of<PaymentViewModel>(context);
-  
+    final authViewModel = Provider.of<AuthViewModel>(context);
+    final userId = authViewModel.user?.uid;
     return Scaffold(
       body: Container(
         padding: const EdgeInsets.only(top: 50),
@@ -44,7 +47,17 @@ class _WalletState extends State<Wallet> {
                 children: [
                 Text("Your Wallet", style: TextHelper.subtitleTextStyle(),),
                 const SizedBox(height: 10,),
-                Text("\$100", style: TextHelper.bodyTextStyle(context),)
+                FutureBuilder(
+                  future: CloudStore().getWallet(userId!),
+                  builder: (context, snapshot){
+                    if(snapshot.hasData){
+                      return Text("\$${snapshot.data}", style: TextHelper.bodyTextStyle(context));
+                    }
+                    else{
+                      return Text("\$0", style: TextHelper.bodyTextStyle(context));
+                    }
+                  },
+                )
               ],)
             ],),
           ),

@@ -1,4 +1,5 @@
 import 'package:ecommerce_app/services/auth_service.dart';
+import 'package:ecommerce_app/services/cloud_store.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:ecommerce_app/utils/toast_helper.dart';
@@ -62,6 +63,9 @@ class AuthViewModel extends ChangeNotifier {
       case "invalid-credential":
         errorMessage = "Invalid credential!";
         break;
+      case "user-disabled":
+        errorMessage = "User disable";
+        break;
       default:
         errorMessage = "An unknown error occurred!";
     }
@@ -114,9 +118,20 @@ class AuthViewModel extends ChangeNotifier {
       );
 
       User? user = userCredential.user;
+      await user?.updateDisplayName(username);
+      await user?.reload();
+
+      user = FirebaseAuth.instance.currentUser;
+
       if (user != null) {
-        await user.updateDisplayName(username);
-        await user.reload();
+         Map<String, dynamic> userInfoMap = {
+          "email": user.email,
+          "name": user.displayName,
+          "imgUrl": user.photoURL,
+          "id": user.uid,
+          "wallet": "0",
+        };
+        await CloudStore().addUser(user.uid, userInfoMap);
       }
 
       Navigator.of(context).pop();

@@ -36,6 +36,7 @@ class AuthMethods {
           "name": userDetails.displayName,
           "imgUrl": userDetails.photoURL,
           "id": userDetails.uid,
+          "wallet": "0",
         };
         await CloudStore().addUser(userDetails.uid, userInfoMap);
       }
