@@ -73,6 +73,7 @@ class _ProfileState extends State<Profile> {
             children: [
               Material(
                 color: Theme.of(context).cardColor,
+                shadowColor: Theme.of(context).shadowColor,
                 elevation: 5,
                 borderRadius: BorderRadius.circular(10),
                 child: Container(
@@ -87,6 +88,7 @@ class _ProfileState extends State<Profile> {
               const SizedBox(height: 20,),
               Material(
                 color: Theme.of(context).cardColor,
+                shadowColor: Theme.of(context).shadowColor,
                 elevation: 5,
                 borderRadius: BorderRadius.circular(10),
                 child: Container(
@@ -101,6 +103,7 @@ class _ProfileState extends State<Profile> {
               const SizedBox(height: 20,),
               Material(
                 color: Theme.of(context).cardColor,
+                shadowColor: Theme.of(context).shadowColor,
                 elevation: 5,
                 borderRadius: BorderRadius.circular(10),
                 child: Container(
@@ -123,6 +126,7 @@ class _ProfileState extends State<Profile> {
               const SizedBox(height: 20,),
               Material(
                 color: Theme.of(context).cardColor,
+                shadowColor: Theme.of(context).shadowColor,
                 elevation: 5,
                 borderRadius: BorderRadius.circular(10),
                 child: Container(

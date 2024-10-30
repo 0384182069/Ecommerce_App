@@ -4,7 +4,7 @@ class CloudStore {
 
   Future addUser(String userId, Map<String, dynamic> userInfoMap)async{
     return await FirebaseFirestore.instance
-      .collection("User")
+      .collection("Users")
       .doc(userId)
       .set(userInfoMap);
   }
@@ -12,7 +12,7 @@ class CloudStore {
   Future<String?> getWallet(String userId) async {
   try {
     DocumentSnapshot userDoc = await FirebaseFirestore.instance
-      .collection("User")
+      .collection("Users")
       .doc(userId)
       .get();
 
@@ -24,10 +24,11 @@ class CloudStore {
   }
   return null;
   }
+  
   Future<void> updateWallet(String userId, String newAmount) async {
     try {
       DocumentSnapshot userDoc = await FirebaseFirestore.instance
-          .collection("User")
+          .collection("Users")
           .doc(userId)
           .get();
 
@@ -36,17 +37,24 @@ class CloudStore {
         
         double updatedWallet = currentWallet + double.parse(newAmount);
         
-        // Cập nhật lại ví với số tiền mới
         await FirebaseFirestore.instance
-            .collection("User")
+            .collection("Users")
             .doc(userId)
             .update({
-          'wallet': updatedWallet.toString(),
+              'wallet': updatedWallet.toString(),
         });
         print("Wallet updated successfully with new amount: $updatedWallet");
       }
     } catch (e) {
       print("Error updating wallet: $e");
     }
+  }
+
+  Future<bool> checkUserExists(String userId) async {
+    DocumentSnapshot snapshot = await FirebaseFirestore.instance
+      .collection('Users')
+      .doc(userId)
+      .get();
+    return snapshot.exists; 
   }
 }

@@ -31,14 +31,17 @@ class AuthMethods {
       User? userDetails = userCredential.user;
 
       if (userDetails != null) {
-        Map<String, dynamic> userInfoMap = {
-          "email": userDetails.email,
-          "name": userDetails.displayName,
-          "imgUrl": userDetails.photoURL,
-          "id": userDetails.uid,
-          "wallet": "0",
-        };
-        await CloudStore().addUser(userDetails.uid, userInfoMap);
+        bool userExists = await CloudStore().checkUserExists(userDetails.uid);
+        if(!userExists){
+          Map<String, dynamic> userInfoMap = {
+            "email": userDetails.email,
+            "name": userDetails.displayName,
+            "imgUrl": userDetails.photoURL,
+            "id": userDetails.uid,
+            "wallet": "0",
+          };
+          await CloudStore().addUser(userDetails.uid, userInfoMap);
+        }
       }
 
       return userCredential;

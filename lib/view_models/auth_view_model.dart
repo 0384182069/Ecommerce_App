@@ -33,7 +33,7 @@ class AuthViewModel extends ChangeNotifier {
         },
       );
 
-      UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
+      await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
       
       Navigator.of(context).pop(); 
       _user = FirebaseAuth.instance.currentUser; 

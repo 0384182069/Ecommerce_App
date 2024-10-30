@@ -1,8 +1,6 @@
 import 'package:ecommerce_app/services/cloud_store.dart';
-import 'package:ecommerce_app/services/payment_service.dart';
+import 'package:ecommerce_app/services/stripe_service.dart';
 import 'package:ecommerce_app/view_models/auth_view_model.dart';
-import 'package:ecommerce_app/views/wallet_view.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:ecommerce_app/utils/toast_helper.dart';
@@ -44,8 +42,7 @@ class PaymentViewModel extends ChangeNotifier {
           merchantDisplayName: 'SPEEDY EAT',
         ),
       );
-      await displayPaymentSheet();
-      await CloudStore().updateWallet(user!.uid, amount);
+      await displayPaymentSheet(amount,user);
     } catch (e) {
       print("Exception: $e");
       ToastHelper.showToast("Payment failed", Colors.red);
@@ -55,11 +52,12 @@ class PaymentViewModel extends ChangeNotifier {
     }
   }
 
-  Future<void> displayPaymentSheet() async {
+  Future<void> displayPaymentSheet(String amount, dynamic user) async {
     try {
       await Stripe.instance.presentPaymentSheet();
       ToastHelper.showToast("Successful Payment", Colors.green);
       paymentIntent = null; 
+      await CloudStore().updateWallet(user!.uid, amount);
     } on StripeException catch (e) {
       print("Error is: $e");
       ToastHelper.showToast("Cancel Payment", Colors.red);

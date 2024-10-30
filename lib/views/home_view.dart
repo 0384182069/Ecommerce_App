@@ -51,13 +51,14 @@ class _HomeState extends State<Home> {
       "Discover and get food",
       style: TextHelper.subtitleTextStyle(),
     ),
-    const SizedBox(height: 5),
+    const SizedBox(height: 15),
     showItems(),
     const SizedBox(height: 10),
     SingleChildScrollView(
       scrollDirection: Axis.horizontal,
         child: Row(children: [
           Material(
+            shadowColor: Theme.of(context).shadowColor,
             elevation: 5,
             borderRadius: BorderRadius.circular(25),
             child: ClipRRect(
@@ -71,6 +72,7 @@ class _HomeState extends State<Home> {
           ),
           const SizedBox(width: 5,),
           Material(
+            shadowColor: Theme.of(context).shadowColor,
             elevation: 5,
             borderRadius: BorderRadius.circular(25),
             child: ClipRRect(
@@ -95,6 +97,7 @@ class _HomeState extends State<Home> {
           },
            child: Material(
             color: Theme.of(context).cardColor,
+            shadowColor: Theme.of(context).shadowColor,
             elevation: 5,
             borderRadius: BorderRadius.circular(25),
             child: Padding(
@@ -118,6 +121,7 @@ class _HomeState extends State<Home> {
          ),
           Material(
           color: Theme.of(context).cardColor,
+          shadowColor: Theme.of(context).shadowColor,
           elevation: 5,
           borderRadius: BorderRadius.circular(25),
           child: Padding(
@@ -160,6 +164,7 @@ class _HomeState extends State<Home> {
                   });
                 },
                 child: Material(
+                  shadowColor: Theme.of(context).shadowColor,
                   elevation: 5,
                   borderRadius: BorderRadius.circular(10),
                   child: Container(
@@ -188,6 +193,7 @@ class _HomeState extends State<Home> {
                   });
                 },
                 child: Material(
+                  shadowColor: Theme.of(context).shadowColor,
                   elevation: 5,
                   borderRadius: BorderRadius.circular(10),
                   child: Container(
@@ -216,6 +222,7 @@ class _HomeState extends State<Home> {
                   });
                 },
                 child: Material(
+                  shadowColor: Theme.of(context).shadowColor,
                   elevation: 5,
                   borderRadius: BorderRadius.circular(10),
                   child: Container(
@@ -244,6 +251,7 @@ class _HomeState extends State<Home> {
                   });
                 },
                 child: Material(
+                  shadowColor: Theme.of(context).shadowColor,
                   elevation: 5,
                   borderRadius: BorderRadius.circular(10),
                   child: Container(
