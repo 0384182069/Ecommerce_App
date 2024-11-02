@@ -1,7 +1,7 @@
+import 'package:ecommerce_app/admin/admin_login.dart';
 import 'package:ecommerce_app/view_models/auth_view_model.dart';
 import 'package:ecommerce_app/view_models/payment_view_model.dart';
 import 'package:ecommerce_app/view_models/themma_view_model.dart';
-import 'package:ecommerce_app/views/login_view.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -49,7 +49,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: themeViewModel.currentTheme,
       title: 'SPEEDYEATS',
-      home: const Login(),
+      home: const AdminLogin(),
     );
   }
 }

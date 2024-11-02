@@ -20,82 +20,143 @@ class _HomeState extends State<Home> {
     final authViewModel = Provider.of<AuthViewModel>(context);
     final user = authViewModel.user;
     return Scaffold(
-      body: ListView(
-        padding: const EdgeInsets.only(top: 50, left: 15, right: 15),
-        children: [
-        Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-        Text(
-          "Hello ${user?.displayName}",
-          style: TextHelper.bodyTextStyle(context),
+      drawer: Drawer(
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            Container(
+              height: 100,
+              child: DrawerHeader(
+                decoration: BoxDecoration(
+                  color: Theme.of(context).primaryColor,
+                ),
+                child: Center(
+                  child: Text("Favorites", style: TextStyle(
+                    color: Theme.of(context).colorScheme.primary,
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'Poppins'
+                  ),),
+                )),
+            ),
+            ListTile(
+              leading: Icon(Icons.favorite, color: Theme.of(context).colorScheme.secondary,),
+              title: Text('Favorite Item 1', style: TextHelper.bodyTextStyle(context)),
+              onTap: () {
+              },
+            ),
+          ],
+          
         ),
-        Container(
-          padding: const EdgeInsets.all(5),
-          decoration: BoxDecoration(
-            color: Colors.black,
-            borderRadius: BorderRadius.circular(8),
+        
+      ),
+      body: Builder(
+        builder: (context) => ListView(
+          padding: const EdgeInsets.only(top: 50, left: 15, right: 15),
+          children: [
+          Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+          Text(
+            "Hello ${user?.displayName}",
+            style: TextHelper.bodyTextStyle(context),
           ),
-          child: const Icon(
-            Icons.shopping_cart_outlined,
-            color: Colors.white,
-          ),
-        ),
-      ],
-    ),
-    Text(
-      "Delicious food",
-      style: TextHelper.headerTextStyle(context),
-    ),
-    Text(
-      "Discover and get food",
-      style: TextHelper.subtitleTextStyle(),
-    ),
-    const SizedBox(height: 15),
-    showItems(),
-    const SizedBox(height: 10),
-    SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-        child: Row(children: [
-          Material(
-            shadowColor: Theme.of(context).shadowColor,
-            elevation: 5,
-            borderRadius: BorderRadius.circular(25),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(25),
-              child: Container(
-                width: 320,
-                height: 180,
-                child: Image.asset("assets/images/banner1.png", fit: BoxFit.cover,),
+          GestureDetector(
+            onTap: (){
+              Scaffold.of(context).openDrawer();
+            },
+            child: Container(
+              padding: const EdgeInsets.all(5),
+              decoration: BoxDecoration(
+                color: Theme.of(context).primaryColor,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Icon(
+                Icons.favorite,
+                color: Theme.of(context).colorScheme.secondary,
               ),
             ),
           ),
-          const SizedBox(width: 5,),
-          Material(
-            shadowColor: Theme.of(context).shadowColor,
-            elevation: 5,
-            borderRadius: BorderRadius.circular(25),
-            child: ClipRRect(
+        ],
+            ),
+            Text(
+        "Delicious food",
+        style: TextHelper.headerTextStyle(context),
+            ),
+            Text(
+        "Discover and get food",
+        style: TextHelper.subtitleTextStyle(),
+            ),
+            const SizedBox(height: 15),
+            showItems(),
+            const SizedBox(height: 10),
+            SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+          child: Row(children: [
+            Material(
+              shadowColor: Theme.of(context).shadowColor,
+              elevation: 5,
               borderRadius: BorderRadius.circular(25),
-              child: Container(
-                width: 320,
-                height: 180,
-                child: Image.asset("assets/images/banner2.png", fit: BoxFit.cover,),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(25),
+                child: Container(
+                  width: 320,
+                  height: 180,
+                  child: Image.asset("assets/images/banner1.png", fit: BoxFit.cover,),
+                ),
               ),
             ),
-          ),
-        ],)
-    ),
-    const SizedBox(height: 10),
-    IntrinsicHeight(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-         GestureDetector(
-          onTap: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => const Details()));
-          },
-           child: Material(
+            const SizedBox(width: 5,),
+            Material(
+              shadowColor: Theme.of(context).shadowColor,
+              elevation: 5,
+              borderRadius: BorderRadius.circular(25),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(25),
+                child: Container(
+                  width: 320,
+                  height: 180,
+                  child: Image.asset("assets/images/banner2.png", fit: BoxFit.cover,),
+                ),
+              ),
+            ),
+          ],)
+            ),
+            const SizedBox(height: 10),
+            IntrinsicHeight(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+           GestureDetector(
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const Details()));
+            },
+             child: Material(
+              color: Theme.of(context).cardColor,
+              shadowColor: Theme.of(context).shadowColor,
+              elevation: 5,
+              borderRadius: BorderRadius.circular(25),
+              child: Padding(
+                padding: const EdgeInsets.only(left: 8, right: 8, bottom: 20),
+                child: Column(
+                  children: [
+                    Image.asset("assets/images/1-Fried-Chicken.png",width: 165,height: 165,fit: BoxFit.cover,),
+                    SizedBox(
+                      width: 160,
+                      child: Text(
+                        "1 Miếng Gà Rán",
+                        style: TextHelper.bodyTextStyle(context), 
+                        textAlign: TextAlign.center,
+                        softWrap: true,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+             ),
+           ),
+            Material(
             color: Theme.of(context).cardColor,
             shadowColor: Theme.of(context).shadowColor,
             elevation: 5,
@@ -104,49 +165,26 @@ class _HomeState extends State<Home> {
               padding: const EdgeInsets.only(left: 8, right: 8, bottom: 20),
               child: Column(
                 children: [
-                  Image.asset("assets/images/1-Fried-Chicken.png",width: 165,height: 165,fit: BoxFit.cover,),
+                  Image.asset("assets/images/2-Fried-Chicken.png",width: 165,height: 165,fit: BoxFit.cover,),
                   SizedBox(
                     width: 160,
                     child: Text(
-                      "1 Miếng Gà Rán",
+                      "2 Miếng Gà Giòn",
                       style: TextHelper.bodyTextStyle(context), 
                       textAlign: TextAlign.center,
                       softWrap: true,
-                    ),
-                  ),
+                    )
+                  )
                 ],
               ),
             ),
            ),
-         ),
-          Material(
-          color: Theme.of(context).cardColor,
-          shadowColor: Theme.of(context).shadowColor,
-          elevation: 5,
-          borderRadius: BorderRadius.circular(25),
-          child: Padding(
-            padding: const EdgeInsets.only(left: 8, right: 8, bottom: 20),
-            child: Column(
-              children: [
-                Image.asset("assets/images/2-Fried-Chicken.png",width: 165,height: 165,fit: BoxFit.cover,),
-                SizedBox(
-                  width: 160,
-                  child: Text(
-                    "2 Miếng Gà Giòn",
-                    style: TextHelper.bodyTextStyle(context), 
-                    textAlign: TextAlign.center,
-                    softWrap: true,
-                  )
-                )
-              ],
+          ],
+        ),
             ),
-          ),
-         ),
-        ],
+          ],
+        ),
       ),
-    ),
-  ],
-),
 
 );
 }

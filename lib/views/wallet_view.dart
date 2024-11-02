@@ -53,11 +53,16 @@ class _WalletState extends State<Wallet> {
                 FutureBuilder(
                   future: CloudStore().getWallet(userId!),
                   builder: (context, snapshot){
-                    if(snapshot.hasData){
-                      return Text("\$${snapshot.data}", style: TextHelper.bodyTextStyle(context));
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return CircularProgressIndicator(
+                        color: Theme.of(context).colorScheme.secondary,
+                          );
                     }
-                    else{
-                      return Text("\$0", style: TextHelper.bodyTextStyle(context));
+                    else if (snapshot.hasData) {
+                      return Text("\$${snapshot.data}", style: TextHelper.bodyTextStyle(context));
+                    } 
+                    else {
+                        return Text("\$0", style: TextHelper.bodyTextStyle(context));
                     }
                   },
                 )

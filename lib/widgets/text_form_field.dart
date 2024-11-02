@@ -33,21 +33,21 @@ class _MyTextfieldState extends State<MyTextfield> {
                 obscureText: widget.isPasswordField? _isObscure: false,
                 style: TextHelper.bodyTextStyle(context),
                 decoration: InputDecoration(
-                hintStyle: TextHelper.subtitleTextStyle(),
-                hintText: widget.hintText,
-                prefixIcon: widget.icon,
-                suffixIcon: widget.isPasswordField
-                ?IconButton(
-                  icon: Icon(
-                    _isObscure ? Icons.visibility: Icons.visibility_off,
-                    color: Colors.grey,
-                  ),
-                  onPressed: (){
-                    setState(() {
-                      _isObscure = !_isObscure;
-                    });
-                  },
-                ): const SizedBox.shrink(),
+                  hintStyle: TextHelper.subtitleTextStyle(),
+                  hintText: widget.hintText,
+                  prefixIcon: widget.icon,
+                  suffixIcon: widget.isPasswordField
+                  ?IconButton(
+                    icon: Icon(
+                      _isObscure ? Icons.visibility: Icons.visibility_off,
+                      color: Colors.grey,
+                    ),
+                    onPressed: (){
+                      setState(() {
+                        _isObscure = !_isObscure;
+                      });
+                    },
+                  ): const SizedBox.shrink(),
                 ),
               ),
             );

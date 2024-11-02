@@ -28,11 +28,17 @@ class _DetailsState extends State<Details> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            GestureDetector(
-              onTap: (){
-                Navigator.pop(context);
-              },
-              child: Icon(Icons.arrow_back_ios_new_outlined, color: Theme.of(context).colorScheme.onSecondary,),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                GestureDetector(
+                  onTap: (){
+                    Navigator.pop(context);
+                  },
+                  child: Icon(Icons.arrow_back_ios_new_outlined, color: Theme.of(context).primaryColor,),
+                ),
+                Icon(Icons.favorite_border, color: Theme.of(context).primaryColor,),
+              ]
             ),
             Image.asset(
               "assets/images/1-Fried-Chicken.png",
@@ -97,7 +103,7 @@ class _DetailsState extends State<Details> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                   Text("Total Price", style: TextHelper.headerTextStyle(context),),
-                  Text("\$28",style: TextHelper.headerTextStyle(context),),
+                  Text("\$${28*quantity}",style: TextHelper.headerTextStyle(context),),
                 ],),
                 Container(
                   padding: const EdgeInsets.all(8),

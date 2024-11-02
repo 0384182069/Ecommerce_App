@@ -20,7 +20,7 @@ class ThemeViewModel with ChangeNotifier {
     scaffoldBackgroundColor: Colors.white, 
     cardColor: Colors.white,
     canvasColor: Colors.black,
-    shadowColor: Colors.black.withOpacity(1),
+    shadowColor: Colors.black,
 
     colorScheme: const ColorScheme.light(
       primary: Colors.white,
