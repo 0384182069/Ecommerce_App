@@ -6,7 +6,7 @@ class TextHelper {
     return TextStyle(
       color: Theme.of(context).textTheme.bodyLarge?.color ?? Colors.black,
       fontSize: 25,
-      fontWeight: FontWeight.bold,
+      fontWeight: FontWeight.w900,
       fontFamily: "Poppins",
     );
   }
@@ -24,7 +24,7 @@ class TextHelper {
     return TextStyle(
       color: Theme.of(context).textTheme.bodyMedium?.color ?? Colors.black,
       fontSize: 20,
-      fontWeight: FontWeight.w800,
+      fontWeight: FontWeight.w700,
       fontFamily: "Poppins",
     );
   }

@@ -169,9 +169,11 @@ class _AdminLoginState extends State<AdminLogin> {
       ToastHelper.showToast("Login Successfully!", Colors.green);
     } on FirebaseAuthException catch (e){
       if(e.code == "user-not-found" || e.code == "wrong-password"){
+        Navigator.of(context).pop(); 
         ToastHelper.showToast("Wrong password or username!", Colors.red);
       }
       else if (e.code == "invalid-credential"){
+        Navigator.of(context).pop(); 
         ToastHelper.showToast("Invalid credential!", Colors.red);
       }
     }
