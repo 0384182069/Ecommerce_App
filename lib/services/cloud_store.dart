@@ -24,6 +24,11 @@ class CloudStore {
   }
   return null;
   }
+  Future addFoodItem(String category,Map<String,dynamic> foodInfo)async{
+    return await FirebaseFirestore.instance
+      .collection(category)
+      .add(foodInfo);
+  }
   
   Future<void> updateWallet(String userId, String newAmount) async {
     try {

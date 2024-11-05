@@ -1,5 +1,13 @@
+import 'dart:io';
+import 'package:ecommerce_app/services/cloud_store.dart';
+import 'package:ecommerce_app/services/rest_api.dart';
 import 'package:ecommerce_app/utils/text_helper.dart';
+import 'package:ecommerce_app/utils/toast_helper.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:random_string/random_string.dart';
 
 class AdminAddfood extends StatefulWidget {
   const AdminAddfood({super.key});
@@ -10,10 +18,52 @@ class AdminAddfood extends StatefulWidget {
 
 class _AdminAddfoodState extends State<AdminAddfood> {
   final List<String> categories = ["Chicken","Pizza", "Burger", "Combo"];
-  String? value;
+  String? category;
   TextEditingController nameController = new TextEditingController();
   TextEditingController priceController = new TextEditingController();
   TextEditingController detailController = new TextEditingController();
+  final ImagePicker _imagePicker = ImagePicker(); 
+  File? selectedImage; 
+  final RestApi api = RestApi();
+
+  Future getImage() async {
+    var image = await _imagePicker.pickImage(source: ImageSource.gallery);
+    if (image != null) {
+      setState(() {
+        selectedImage = File(image.path);
+        print(selectedImage);
+      });
+    }
+  }
+  Future<void> addFoodItem() async {
+    if (selectedImage != null) {
+      Uint8List bytes = await selectedImage!.readAsBytes();
+      String? imageUrl = await api.uploadImage(bytes,selectedImage!.path);
+
+      if (imageUrl != null) {
+        Map<String, dynamic> foodData = {
+          "name": nameController.text,
+          "price": priceController.text,
+          "detail": detailController.text,
+          "category": category,
+          "imageUrl": imageUrl 
+        };
+
+        await CloudStore().addFoodItem(category!,foodData);
+        // Thông báo thành công và làm mới trạng thái
+        setState(() {
+          selectedImage = null;
+          nameController.clear();
+          priceController.clear();
+          detailController.clear();
+          category = null;
+        });
+        ToastHelper.showToast("Food item added successfully!", Colors.green);
+      } else {
+        ToastHelper.showToast("Failed to upload image", Colors.red);
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,19 +86,30 @@ class _AdminAddfoodState extends State<AdminAddfood> {
             children: [
               Center(child: Text("Upload The Food Picture",style: TextHelper.bodyTextStyle(context),)),
               const SizedBox(height: 10,),
-              Center(
-                child: Material(
-                  elevation: 5,
-                  borderRadius: BorderRadius.circular(20),
-                  child: Container(
-                    width: 165,
-                    height: 165,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(color: Colors.black,width: 1.5),
-                      borderRadius: BorderRadius.circular(20),
+              GestureDetector(
+                onTap: getImage,
+                child: Center(
+                  child: Material(
+                    elevation: 5,
+                    borderRadius: BorderRadius.circular(20),
+                    child: Container(
+                      width: 165,
+                      height: 165,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        border: Border.all(color: Colors.black,width: 1.5),
+                        borderRadius: BorderRadius.circular(20)
+                      ),
+                      child: selectedImage == null 
+                      ?const Icon(
+                        Icons.camera_alt_outlined, 
+                        color: Colors.black, 
+                        size: 50,)
+                      : ClipRRect(
+                        borderRadius: BorderRadius.circular(20),
+                        child: Image.file(selectedImage!, fit: BoxFit.cover,),
+                      ),
                     ),
-                    child: const Icon(Icons.camera_alt_outlined, color: Colors.black, size: 50,),
                   ),
                 ),
               ),
@@ -128,35 +189,38 @@ class _AdminAddfoodState extends State<AdminAddfood> {
                     items: categories.map((item)=>DropdownMenuItem<String>(
                       value: item,
                       child: Text(item,style: TextHelper.bodyTextStyle(context),))).toList(), 
-                    onChanged: ((value) => setState(() {
-                      this.value = value;
+                    onChanged: ((category) => setState(() {
+                      this.category = category;
                     })),
                     borderRadius: BorderRadius.circular(10),
                     dropdownColor: Colors.white, 
                     hint: Text("Select Category", style: TextHelper.bodyTextStyle(context),), 
                     iconSize: 40,
                     icon: const Icon(Icons.arrow_drop_down, color: Colors.black,),
-                    value: value,)
+                    value: category,)
                 ),
               ),
               const SizedBox(height: 30,),
               Center(
-                child: Material(
-                  elevation: 5,
-                  borderRadius: BorderRadius.circular(20),
-                  child: Container(
-                    width: MediaQuery.of(context).size.width/2,
-                    padding: const EdgeInsets.symmetric(vertical: 15),
-                    decoration: BoxDecoration(
-                      color: Colors.black,
-                      borderRadius: BorderRadius.circular(20),
+                child: GestureDetector(
+                  onTap: addFoodItem,
+                  child: Material(
+                    elevation: 5,
+                    borderRadius: BorderRadius.circular(20),
+                    child: Container(
+                      width: MediaQuery.of(context).size.width/2,
+                      padding: const EdgeInsets.symmetric(vertical: 15),
+                      decoration: BoxDecoration(
+                        color: Colors.black,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: const Center(child: Text("Add", style:TextStyle(
+                        color: Colors.white,
+                        fontFamily: "Poppins",
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold,
+                      )),),
                     ),
-                    child: const Center(child: Text("Add", style:TextStyle(
-                      color: Colors.white,
-                      fontFamily: "Poppins",
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold,
-                    )),),
                   ),
                 ),
               ),

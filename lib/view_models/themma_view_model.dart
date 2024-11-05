@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class ThemeViewModel with ChangeNotifier {
+class ThemeViewModel extends ChangeNotifier {
   bool _isDarkTheme = false;
 
   bool get isDarkTheme => _isDarkTheme;
