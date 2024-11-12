@@ -45,6 +45,12 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<!-- Thêm các khóa này vào để yêu cầu quyền truy cập vào thư viện ảnh và camera -->
+	<key>NSPhotoLibraryUsageDescription</key>
+    <string>We need access to your photo library to pick images</string>
+    <key>NSCameraUsageDescription</key>
+    <string>We need access to your camera to take pictures</string>
+	
 	<key>CFBundleURLTypes</key>
     <array>
         <dict>

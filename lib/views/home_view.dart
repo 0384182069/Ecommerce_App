@@ -1,6 +1,6 @@
 import 'package:ecommerce_app/utils/text_helper.dart';
 import 'package:ecommerce_app/view_models/auth_view_model.dart';
-import 'package:ecommerce_app/views/details_view.dart';
+import 'package:ecommerce_app/widgets/products_list.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -13,6 +13,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   bool chicken = false, pizza = false, combo = false, burger = false;
+  String selectedCategory = "";
   
   
   @override
@@ -52,143 +53,86 @@ class _HomeState extends State<Home> {
         
       ),
       body: Builder(
-        builder: (context) => ListView(
-          padding: const EdgeInsets.only(top: 50, left: 15, right: 15),
-          children: [
-          Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-          Text(
-            "Hello ${user?.displayName}",
-            style: TextHelper.bodyTextStyle(context),
-          ),
-          GestureDetector(
-            onTap: (){
-              Scaffold.of(context).openDrawer();
-            },
-            child: Container(
-              padding: const EdgeInsets.all(5),
-              decoration: BoxDecoration(
-                color: Theme.of(context).primaryColor,
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: Icon(
-                Icons.favorite,
-                color: Theme.of(context).colorScheme.secondary,
-              ),
-            ),
-          ),
-        ],
-            ),
+        builder: (context) => Expanded(
+          child: ListView(
+            padding: const EdgeInsets.only(top: 50, left: 15, right: 15),
+            children: [
+            Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
             Text(
-        "Delicious food",
-        style: TextHelper.headerTextStyle(context),
+              "Hello ${user?.displayName}",
+              style: TextHelper.bodyTextStyle(context),
             ),
-            Text(
-        "Discover and get food",
-        style: TextHelper.subtitleTextStyle(),
-            ),
-            const SizedBox(height: 15),
-            showItems(),
-            const SizedBox(height: 10),
-            SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-          child: Row(children: [
-            Material(
-              shadowColor: Theme.of(context).shadowColor,
-              elevation: 5,
-              borderRadius: BorderRadius.circular(25),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(25),
-                child: Container(
-                  width: 320,
-                  height: 180,
-                  child: Image.asset("assets/images/banner1.png", fit: BoxFit.cover,),
+            GestureDetector(
+              onTap: (){
+                Scaffold.of(context).openDrawer();
+              },
+              child: Container(
+                padding: const EdgeInsets.all(5),
+                decoration: BoxDecoration(
+                  color: Theme.of(context).primaryColor,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Icon(
+                  Icons.favorite,
+                  color: Theme.of(context).colorScheme.secondary,
                 ),
               ),
-            ),
-            const SizedBox(width: 5,),
-            Material(
-              shadowColor: Theme.of(context).shadowColor,
-              elevation: 5,
-              borderRadius: BorderRadius.circular(25),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(25),
-                child: Container(
-                  width: 320,
-                  height: 180,
-                  child: Image.asset("assets/images/banner2.png", fit: BoxFit.cover,),
-                ),
-              ),
-            ),
-          ],)
-            ),
-            const SizedBox(height: 10),
-            IntrinsicHeight(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-           GestureDetector(
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => const Details()));
-            },
-             child: Material(
-              color: Theme.of(context).cardColor,
-              shadowColor: Theme.of(context).shadowColor,
-              elevation: 5,
-              borderRadius: BorderRadius.circular(25),
-              child: Padding(
-                padding: const EdgeInsets.only(left: 8, right: 8, bottom: 20),
-                child: Column(
-                  children: [
-                    Image.asset("assets/images/1-Fried-Chicken.png",width: 165,height: 165,fit: BoxFit.cover,),
-                    SizedBox(
-                      width: 160,
-                      child: Text(
-                        "1 Miếng Gà Rán",
-                        style: TextHelper.bodyTextStyle(context), 
-                        textAlign: TextAlign.center,
-                        softWrap: true,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-             ),
-           ),
-            Material(
-            color: Theme.of(context).cardColor,
-            shadowColor: Theme.of(context).shadowColor,
-            elevation: 5,
-            borderRadius: BorderRadius.circular(25),
-            child: Padding(
-              padding: const EdgeInsets.only(left: 8, right: 8, bottom: 20),
-              child: Column(
-                children: [
-                  Image.asset("assets/images/2-Fried-Chicken.png",width: 165,height: 165,fit: BoxFit.cover,),
-                  SizedBox(
-                    width: 160,
-                    child: Text(
-                      "2 Miếng Gà Giòn",
-                      style: TextHelper.bodyTextStyle(context), 
-                      textAlign: TextAlign.center,
-                      softWrap: true,
-                    )
-                  )
-                ],
-              ),
-            ),
-           ),
-          ],
-        ),
             ),
           ],
+              ),
+              Text(
+          "Delicious food",
+          style: TextHelper.headerTextStyle(context),
+              ),
+              Text(
+          "Discover and get food",
+          style: TextHelper.subtitleTextStyle(),
+              ),
+              const SizedBox(height: 15),
+              showCategory(),
+              const SizedBox(height: 10),
+              SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+            child: Row(children: [
+              Material(
+                shadowColor: Theme.of(context).shadowColor,
+                elevation: 5,
+                borderRadius: BorderRadius.circular(25),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(25),
+                  child: Container(
+                    width: 320,
+                    height: 180,
+                    child: Image.asset("assets/images/banner1.png", fit: BoxFit.cover,),
+                  ),
+                ),
+              ),
+              const SizedBox(width: 5,),
+              Material(
+                shadowColor: Theme.of(context).shadowColor,
+                elevation: 5,
+                borderRadius: BorderRadius.circular(25),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(25),
+                  child: Container(
+                    width: 320,
+                    height: 180,
+                    child: Image.asset("assets/images/banner2.png", fit: BoxFit.cover,),
+                  ),
+                ),
+              ),
+            ],)
+          ),
+          ProductList(selectedCategory: selectedCategory),
+          ],
+          ),
         ),
       ),
-
-);
-}
-  Widget showItems(){
+    );
+  }
+  Widget showCategory(){
     return  Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -199,6 +143,7 @@ class _HomeState extends State<Home> {
                     pizza = false;
                     combo = false;
                     burger = false;
+                    selectedCategory = 'Chicken';
                   });
                 },
                 child: Material(
@@ -228,6 +173,7 @@ class _HomeState extends State<Home> {
                     pizza = true;
                     combo = false;
                     burger = false;
+                    selectedCategory = 'Pizza';
                   });
                 },
                 child: Material(
@@ -257,6 +203,7 @@ class _HomeState extends State<Home> {
                     pizza = false;
                     combo = false;
                     burger = true;
+                    selectedCategory = 'Burger';
                   });
                 },
                 child: Material(
@@ -286,6 +233,7 @@ class _HomeState extends State<Home> {
                     pizza = false;
                     combo = true;
                     burger = false;
+                    selectedCategory = 'Combo';
                   });
                 },
                 child: Material(

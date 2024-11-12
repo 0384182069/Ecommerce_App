@@ -24,13 +24,23 @@ class CloudStore {
   }
   return null;
   }
-  Future addFoodItem(String category,Map<String,dynamic> foodInfo)async{
-    return await FirebaseFirestore.instance
-      .collection(category)
-      .add(foodInfo);
-  }
+
+  Future<void> addFoodItem(String category, Map<String, dynamic> foodInfo) async {
+  DocumentReference categoryDocRef = FirebaseFirestore.instance
+      .collection("Products")
+      .doc();  
+
   
-  Future<void> updateWallet(String userId, String newAmount) async {
+  String productId = categoryDocRef.id;
+
+  foodInfo['id'] = productId;
+
+  await categoryDocRef.set(foodInfo);
+}
+
+
+  
+Future<void> updateWallet(String userId, String newAmount) async {
     try {
       DocumentSnapshot userDoc = await FirebaseFirestore.instance
           .collection("Users")

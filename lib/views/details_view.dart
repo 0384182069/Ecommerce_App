@@ -4,7 +4,19 @@ import 'package:flutter/material.dart';
 
 
 class Details extends StatefulWidget {
-  const Details({super.key});
+  final String id;
+  final String name;
+  final String detail;
+  final double price;
+  final String image;
+
+  const Details({
+    super.key, 
+    required this.id,
+    required this.name, 
+    required this.detail, 
+    required this.price, 
+    required this.image,});
 
   @override
   State<Details> createState() => _DetailsState();
@@ -40,8 +52,8 @@ class _DetailsState extends State<Details> {
                 Icon(Icons.favorite_border, color: Theme.of(context).primaryColor,),
               ]
             ),
-            Image.asset(
-              "assets/images/1-Fried-Chicken.png",
+            Image.network(
+              widget.image,
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.width/1.15,
               fit: BoxFit.fill,
@@ -52,7 +64,7 @@ class _DetailsState extends State<Details> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("1 Miếng Gà Rán", style: TextHelper.headerTextStyle(context),)
+                  Text(widget.name, style: TextHelper.headerTextStyle(context),)
                 ],
               ),
               const Spacer(),
@@ -90,7 +102,7 @@ class _DetailsState extends State<Details> {
             ],),
             const SizedBox(height: 10,),
             Text(
-              "2 Miếng Gà Giòn Cay/Gà Truyền Thống/Gà Giòn Không Cay",
+              widget.detail,
               style: TextHelper.subtitleTextStyle(),
             ),
             const Spacer(),
@@ -103,7 +115,7 @@ class _DetailsState extends State<Details> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                   Text("Total Price", style: TextHelper.headerTextStyle(context),),
-                  Text("\$${28*quantity}",style: TextHelper.headerTextStyle(context),),
+                  Text("\$${widget.price*quantity}",style: TextHelper.headerTextStyle(context),),
                 ],),
                 Container(
                   padding: const EdgeInsets.all(8),
