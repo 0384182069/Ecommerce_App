@@ -1,4 +1,5 @@
 import 'package:ecommerce_app/view_models/auth_view_model.dart';
+import 'package:ecommerce_app/view_models/cart_view_model.dart';
 import 'package:ecommerce_app/view_models/payment_view_model.dart';
 import 'package:ecommerce_app/view_models/themma_view_model.dart';
 import 'package:ecommerce_app/views/login_view.dart';
@@ -34,6 +35,12 @@ void main() async{
         ChangeNotifierProvider(create: (_) => AuthViewModel()),
         ChangeNotifierProvider(create: (_) => ThemeViewModel()),
         ChangeNotifierProvider(create: (_) => PaymentViewModel()),
+        ChangeNotifierProvider<CartViewModel>(
+          create: (context) {
+            final userId = Provider.of<AuthViewModel>(context, listen: false).user?.uid ?? '';
+            return CartViewModel(userId: userId);
+          },
+        ),
       ],
       child: const MyApp(),
     ),);

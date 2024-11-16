@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:ecommerce_app/services/cloud_store.dart';
-import 'package:ecommerce_app/services/rest_api.dart';
+import 'package:ecommerce_app/services/api_call.dart';
 import 'package:ecommerce_app/utils/text_helper.dart';
 import 'package:ecommerce_app/utils/toast_helper.dart';
 import 'package:flutter/foundation.dart';

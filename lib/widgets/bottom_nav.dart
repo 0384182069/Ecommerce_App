@@ -1,8 +1,7 @@
-
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:ecommerce_app/views/home_view.dart';
-import 'package:ecommerce_app/views/order_view.dart';
 import 'package:ecommerce_app/views/profile_view.dart';
+import 'package:ecommerce_app/views/shoppingcart_view.dart';
 import 'package:ecommerce_app/views/wallet_view.dart';
 import 'package:flutter/material.dart';
 
@@ -21,14 +20,14 @@ class _BottomNavState extends State<BottomNav> {
   late Home homePage;
   late Wallet walletPage;
   late Profile profilePage;
-  late Order orderPage;
+  late Cart cartPage;
   @override
   void initState(){
     homePage = const Home();
     walletPage = const Wallet();
     profilePage = const Profile();
-    orderPage = const Order();
-    pages = [homePage, orderPage, walletPage, profilePage];
+    cartPage = const Cart();
+    pages = [homePage, cartPage, walletPage, profilePage];
     super.initState();
   }
 

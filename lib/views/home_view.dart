@@ -1,6 +1,6 @@
 import 'package:ecommerce_app/utils/text_helper.dart';
 import 'package:ecommerce_app/view_models/auth_view_model.dart';
-import 'package:ecommerce_app/widgets/products_list.dart';
+import 'package:ecommerce_app/view_models/product_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

@@ -65,6 +65,7 @@ class _ProductListState extends State<ProductList> {
                             detail: product.detail,
                             price: product.price,
                             image: product.imageUrl,
+                            category: product.category,
                           ),
                         ),
                       );
