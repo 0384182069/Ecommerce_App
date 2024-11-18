@@ -1,5 +1,7 @@
+import 'package:ecommerce_app/models/favorite_model.dart';
 import 'package:ecommerce_app/utils/text_helper.dart';
 import 'package:ecommerce_app/view_models/auth_view_model.dart';
+import 'package:ecommerce_app/view_models/favorite_view_model.dart';
 import 'package:ecommerce_app/view_models/product_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -20,37 +22,82 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     final authViewModel = Provider.of<AuthViewModel>(context);
     final user = authViewModel.user;
+    final userId = user?.uid;
+
+    final favoriteViewModel = Provider.of<FavoriteViewModel>(context);
+    final favoriteProducts = favoriteViewModel.favorites;
+    
     return Scaffold(
-      drawer: Drawer(
-        backgroundColor: Theme.of(context).colorScheme.primary,
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-            Container(
-              height: 100,
-              child: DrawerHeader(
-                decoration: BoxDecoration(
-                  color: Theme.of(context).primaryColor,
-                ),
-                child: Center(
-                  child: Text("Favorites", style: TextStyle(
+    drawer: Drawer(
+      backgroundColor: Theme.of(context).colorScheme.primary,
+      child: ListView(
+        padding: EdgeInsets.zero,
+        children: [
+          Container(
+            height: 100,
+            child: DrawerHeader(
+              decoration: BoxDecoration(
+                color: Theme.of(context).primaryColor,
+              ),
+              child: Center(
+                child: Text(
+                  "Favorites",
+                  style: TextStyle(
                     color: Theme.of(context).colorScheme.primary,
                     fontSize: 22,
                     fontWeight: FontWeight.bold,
-                    fontFamily: 'Poppins'
-                  ),),
-                )),
+                    fontFamily: 'Poppins',
+                  ),
+                ),
+              ),
             ),
-            ListTile(
-              leading: Icon(Icons.favorite, color: Theme.of(context).colorScheme.secondary,),
-              title: Text('Favorite Item 1', style: TextHelper.bodyTextStyle(context)),
-              onTap: () {
-              },
-            ),
-          ],
+          ),
+          StreamBuilder<List<FavoriteModel>>(
+            stream: favoriteViewModel.favorites, 
+            builder: (context, snapshot) {
           
-        ),
-        
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(child: CircularProgressIndicator());
+              }
+
+              if (snapshot.hasError) {
+                return Center(child: Text('Error: ${snapshot.error}'));
+              }
+
+              if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                return Center(child: Text('No favorites available', style: TextHelper.bodyTextStyle(context),));
+              }
+              final favoriteProducts = snapshot.data!;
+
+              return Column(
+                children: favoriteProducts.map((favoriteProduct) {
+                  return ListTile(
+                    leading: Icon(
+                      Icons.favorite,
+                      color: Theme.of(context).colorScheme.secondary,
+                    ),
+                    title: Text(
+                      favoriteProduct.name,
+                      style: TextHelper.bodyTextStyle(context),
+                    ),
+                    trailing: ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: Image.network(
+                        favoriteProduct.image,
+                        width: 50,
+                        height: 50,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    onTap: () {
+                      favoriteViewModel.toggleFavorite(favoriteProduct);
+                    },
+                  );
+                }).toList(),
+              );
+            },
+          ),
+        ],),
       ),
       body: Builder(
         builder: (context) => Expanded(

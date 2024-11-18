@@ -2,6 +2,7 @@
 import 'package:ecommerce_app/utils/text_helper.dart';
 import 'package:ecommerce_app/view_models/auth_view_model.dart';
 import 'package:ecommerce_app/view_models/themma_view_model.dart';
+import 'package:ecommerce_app/views/login_view.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -77,10 +78,12 @@ class _ProfileState extends State<Profile> {
                 borderRadius: BorderRadius.circular(10),
                 child: Container(
                   padding: const EdgeInsets.all(15),
-                  child: Row(children: [
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
                     const Icon(Icons.person, size: 30,),
                     const SizedBox(width: 15,),
-                    Text("Infomation", style: TextHelper.bodyTextStyle(context),),
+                    Text(listProfile[0], style: TextHelper.bodyTextStyle(context),),
                   ],),
                 ),
               ),
@@ -92,10 +95,12 @@ class _ProfileState extends State<Profile> {
                 borderRadius: BorderRadius.circular(10),
                 child: Container(
                   padding: const EdgeInsets.all(15),
-                  child: Row(children: [
-                    const Icon(Icons.security, size: 30,),
+                  child:Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                    const Icon(Icons.email, size: 30,),
                     const SizedBox(width: 15,),
-                    Text("Security", style: TextHelper.bodyTextStyle(context),),
+                    Text(listProfile[1], style: TextHelper.bodyTextStyle(context),),
                   ],),
                 ),
               ),
@@ -123,18 +128,25 @@ class _ProfileState extends State<Profile> {
                 ),
               ),
               const SizedBox(height: 20,),
-              Material(
-                color: Theme.of(context).cardColor,
-                shadowColor: Theme.of(context).shadowColor,
-                elevation: 5,
-                borderRadius: BorderRadius.circular(10),
-                child: Container(
-                  padding: const EdgeInsets.all(15),
-                  child: Row(children: [
-                    const Icon(Icons.logout, size: 30,),
-                    const SizedBox(width: 15,),
-                    Text("LogOut", style: TextHelper.bodyTextStyle(context),),
-                  ],),
+              GestureDetector(
+                onTap: (){
+                   authViewModel.logout().then((_) {
+                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const Login()));
+                    });
+                },
+                child: Material(
+                  color: Theme.of(context).cardColor,
+                  shadowColor: Theme.of(context).shadowColor,
+                  elevation: 5,
+                  borderRadius: BorderRadius.circular(10),
+                  child: Container(
+                    padding: const EdgeInsets.all(15),
+                    child: Row(children: [
+                      const Icon(Icons.logout, size: 30,),
+                      const SizedBox(width: 15,),
+                      Text("LogOut", style: TextHelper.bodyTextStyle(context),),
+                    ],),
+                  ),
                 ),
               ),
             ],

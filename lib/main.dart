@@ -1,5 +1,7 @@
+import 'package:ecommerce_app/models/favorite_model.dart';
 import 'package:ecommerce_app/view_models/auth_view_model.dart';
 import 'package:ecommerce_app/view_models/cart_view_model.dart';
+import 'package:ecommerce_app/view_models/favorite_view_model.dart';
 import 'package:ecommerce_app/view_models/payment_view_model.dart';
 import 'package:ecommerce_app/view_models/themma_view_model.dart';
 import 'package:ecommerce_app/views/login_view.dart';
@@ -35,6 +37,13 @@ void main() async{
         ChangeNotifierProvider(create: (_) => AuthViewModel()),
         ChangeNotifierProvider(create: (_) => ThemeViewModel()),
         ChangeNotifierProvider(create: (_) => PaymentViewModel()),
+
+        ChangeNotifierProvider<FavoriteViewModel>(
+          create: (context) {
+            final userId = Provider.of<AuthViewModel>(context, listen: false).user?.uid ?? '';
+            return FavoriteViewModel(userId: userId);
+          },
+        ),
         ChangeNotifierProvider<CartViewModel>(
           create: (context) {
             final userId = Provider.of<AuthViewModel>(context, listen: false).user?.uid ?? '';

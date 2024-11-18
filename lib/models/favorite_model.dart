@@ -1,11 +1,13 @@
 class FavoriteModel {
   final String id;
   final String name;
+  final String image;
   bool isFavorite;
 
   FavoriteModel({
     required this.id,
     required this.name,
+    required this.image,
     this.isFavorite = false,
   });
 
@@ -13,6 +15,7 @@ class FavoriteModel {
     return {
       'id': id,
       'name': name,
+      'image': image,
       'isFavorite': isFavorite,
     };
   }
@@ -21,6 +24,7 @@ class FavoriteModel {
     return FavoriteModel(
       id: map['id'],
       name: map['name'],
+      image: map['image'],
       isFavorite: map['isFavorite'] ?? false,
     );
   }

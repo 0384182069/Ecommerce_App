@@ -4,46 +4,64 @@ import '../models/favorite_model.dart';
 
 class FavoriteViewModel extends ChangeNotifier {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  final List<FavoriteModel> _favorites = [];
+  late final String userId;
 
-  List<FavoriteModel> get favorites => _favorites;
+  FavoriteViewModel({required this.userId});
 
-  Future<void> loadFavorites(String userId) async {
-    final snapshot = await _firestore.collection('Users').doc(userId).collection('Favorites').get();
-    _favorites.clear();
-    for (var doc in snapshot.docs) {
-      _favorites.add(FavoriteModel.fromMap(doc.data()));
+  Stream<List<FavoriteModel>> get favorites {
+    final favoritesRef = _firestore.collection('Users').doc(userId).collection('Favorites');
+    return favoritesRef.snapshots().map((snapshot) {
+      return snapshot.docs
+          .map((doc) => FavoriteModel.fromMap(doc.data()))
+          .toList();
+    });
+  }
+
+  // Thêm sản phẩm vào danh sách yêu thích
+  Future<void> addFavorite(FavoriteModel product) async {
+    final favoriteRef = _firestore
+        .collection('Users')
+        .doc(userId)
+        .collection('Favorites')
+        .doc(product.id);
+
+    // Kiểm tra xem sản phẩm đã có trong danh sách yêu thích chưa
+    final favoriteSnapshot = await favoriteRef.get();
+
+    if (!favoriteSnapshot.exists) {
+      await favoriteRef.set(product.toMap());
     }
     notifyListeners();
   }
 
-  Future<void> addFavorite(FavoriteModel product, String userId) async {
-    _favorites.add(product);
+  // Xóa sản phẩm khỏi danh sách yêu thích
+  Future<void> removeFavorite(String productId) async {
     await _firestore
         .collection('Users')
         .doc(userId)
         .collection('Favorites')
-        .doc(product.id)
-        .set(product.toMap());
+        .doc(productId)
+        .delete();
     notifyListeners();
   }
 
-  Future<void> removeFavorite(String id, String userId) async {
-    _favorites.removeWhere((product) => product.id == id);
-    await _firestore.collection('Users').doc(userId).collection('Favorites').doc(id).delete();
-    notifyListeners();
-  }
-
-  Future<void> toggleFavorite(FavoriteModel product, String userId) async {
-    product.toggleFavorite();
+  // Thay đổi trạng thái yêu thích của sản phẩm
+  Future<void> toggleFavorite(FavoriteModel product) async {
+    product.toggleFavorite(); 
     if (product.isFavorite) {
-      await addFavorite(product, userId);
+      await addFavorite(product);
     } else {
-      await removeFavorite(product.id, userId);
+      await removeFavorite(product.id);
     }
   }
 
-  bool isFavorite(String id) {
-    return _favorites.any((product) => product.id == id && product.isFavorite);
+  Future<bool> isFavorite(String productId) {
+    return _firestore
+        .collection('Users')
+        .doc(userId)
+        .collection('Favorites')
+        .doc(productId)
+        .get()
+        .then((snapshot) => snapshot.exists);
   }
 }

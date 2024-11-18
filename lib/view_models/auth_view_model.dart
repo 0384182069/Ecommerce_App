@@ -164,4 +164,14 @@ class AuthViewModel extends ChangeNotifier {
     }
     ToastHelper.showToast(errorMessage, Colors.red);
   }
+
+   Future<void> logout() async {
+    try {
+      setSigningIn =false;
+      await FirebaseAuth.instance.signOut();
+      notifyListeners(); 
+    } catch (e) {
+      print('Logout Error: $e');
+    }
+  }
 }

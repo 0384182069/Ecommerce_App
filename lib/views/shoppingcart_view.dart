@@ -12,6 +12,8 @@ class Cart extends StatefulWidget {
 }
 
 class _CartState extends State<Cart> {
+  double totalPrice = 0.0; 
+
   @override
   Widget build(BuildContext context) {
     final cartViewModel = Provider.of<CartViewModel>(context);  
@@ -122,7 +124,7 @@ class _CartState extends State<Cart> {
                       }
 
                       final cartItems = snapshot.data!;
-                      double totalPrice = cartItems.fold(0.0, (sum, item) => sum + item.totalPrice);
+                      totalPrice = cartItems.fold(0.0, (sum, item) => sum + item.totalPrice);
 
                       return Text("\$${totalPrice.toStringAsFixed(2)}", style: TextHelper.bodyTextStyle(context));  // Hiển thị tổng giá trị
                     },
@@ -130,15 +132,20 @@ class _CartState extends State<Cart> {
                 ],
               ),
             ),
-            Container(
-              padding: const EdgeInsets.symmetric(vertical: 10),
-              margin: const EdgeInsets.all(20),
-              width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.secondary,
-                borderRadius: BorderRadius.circular(20),
+            GestureDetector(
+              onTap: () {
+                cartViewModel.checkout(totalPrice);
+              },
+              child: Container(
+                padding: const EdgeInsets.symmetric(vertical: 10),
+                margin: const EdgeInsets.all(20),
+                width: MediaQuery.of(context).size.width,
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.secondary,
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Center(child: Text("Check Out", style: TextHelper.headerTextStyle(context))),
               ),
-              child: Center(child: Text("Check Out", style: TextHelper.headerTextStyle(context))),
             ),
           ],
         ),
