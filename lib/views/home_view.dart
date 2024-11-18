@@ -22,10 +22,8 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     final authViewModel = Provider.of<AuthViewModel>(context);
     final user = authViewModel.user;
-    final userId = user?.uid;
 
     final favoriteViewModel = Provider.of<FavoriteViewModel>(context);
-    final favoriteProducts = favoriteViewModel.favorites;
     
     return Scaffold(
     drawer: Drawer(

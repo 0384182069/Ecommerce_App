@@ -2,7 +2,6 @@ import 'package:ecommerce_app/models/cart_model.dart';
 import 'package:ecommerce_app/models/favorite_model.dart';
 import 'package:ecommerce_app/models/product_model.dart';
 import 'package:ecommerce_app/utils/text_helper.dart';
-import 'package:ecommerce_app/view_models/auth_view_model.dart';
 import 'package:ecommerce_app/view_models/cart_view_model.dart';
 import 'package:ecommerce_app/view_models/favorite_view_model.dart';
 import 'package:flutter/material.dart';
