@@ -1,4 +1,4 @@
-import 'package:ecommerce_app/models/favorite_model.dart';
+import 'package:ecommerce_app/admin/admin_login.dart';
 import 'package:ecommerce_app/view_models/auth_view_model.dart';
 import 'package:ecommerce_app/view_models/cart_view_model.dart';
 import 'package:ecommerce_app/view_models/favorite_view_model.dart';
@@ -65,7 +65,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: themeViewModel.currentTheme,
       title: 'SPEEDYEATS',
-      home: const Login(),
+      home: const AdminLogin(),
     );
   }
 }

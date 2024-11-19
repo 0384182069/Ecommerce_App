@@ -15,6 +15,15 @@ class Product {
     required this.imageUrl,
   });
 
+   Map<String, dynamic> toMap() {
+    return {
+      'name': name,
+      'price': price,
+      'detail': detail,
+      'category': category,
+      'imageUrl': imageUrl,
+    };
+  }
   // Phương thức từ Map để tạo instance Product
   factory Product.fromMap(Map<String, dynamic> data, String documentId) {
     return Product(
@@ -28,4 +37,5 @@ class Product {
           : (data['price'] as num).toDouble(),
     );
   }
+
 }

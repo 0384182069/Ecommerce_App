@@ -8,14 +8,14 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 
-class AdminAddfood extends StatefulWidget {
-  const AdminAddfood({super.key});
+class AdminCreate extends StatefulWidget {
+  const AdminCreate({super.key});
 
   @override
-  State<AdminAddfood> createState() => _AdminAddfoodState();
+  State<AdminCreate> createState() => _AdminCreateState();
 }
 
-class _AdminAddfoodState extends State<AdminAddfood> {
+class _AdminCreateState extends State<AdminCreate> {
 
   final List<String> categories = ["Chicken","Pizza", "Burger", "Combo"];
   String? category;

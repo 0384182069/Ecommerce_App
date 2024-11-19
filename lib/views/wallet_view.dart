@@ -50,8 +50,8 @@ class _WalletState extends State<Wallet> {
                 children: [
                 Text("Your Wallet", style: TextHelper.subtitleTextStyle(),),
                 const SizedBox(height: 10,),
-                FutureBuilder(
-                  future: CloudStore().getWallet(userId!),
+                StreamBuilder(
+                  stream: CloudStore().getWallet(userId!),
                   builder: (context, snapshot){
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return CircularProgressIndicator(

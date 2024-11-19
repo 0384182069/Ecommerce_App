@@ -9,21 +9,23 @@ class CloudStore {
       .set(userInfoMap);
   }
   
-  Future<String?> getWallet(String userId) async {
+Stream<String?> getWallet(String userId) {
   try {
-    DocumentSnapshot userDoc = await FirebaseFirestore.instance
-      .collection("Users")
-      .doc(userId)
-      .get();
-
-    if (userDoc.exists) {
-      return userDoc.get('wallet').toString();
-    }
+    return FirebaseFirestore.instance
+        .collection("Users")
+        .doc(userId)
+        .snapshots()
+        .map((DocumentSnapshot userDoc) {
+      if (userDoc.exists) {
+        return userDoc.get('wallet').toString();
+      }
+      return null;
+    });
   } catch (e) {
-    print("Error getting wallet: $e");
+    print("Error getting wallet stream: $e");
+    return Stream.value(null);
   }
-  return null;
-  }
+}
 
   Future<void> addFoodItem(String category, Map<String, dynamic> foodInfo) async {
   DocumentReference categoryDocRef = FirebaseFirestore.instance
@@ -38,6 +40,17 @@ class CloudStore {
   await categoryDocRef.set(foodInfo);
 }
 
+Future<void> updateFoodItem(String productId, Map<String, dynamic> updatedFoodInfo) async {
+  try {
+    DocumentReference productDocRef = FirebaseFirestore.instance
+        .collection("Products")
+        .doc(productId);
+
+    await productDocRef.set(updatedFoodInfo, SetOptions(merge: true));
+  } catch (e) {
+    throw Exception('Failed to update food item: $e');
+  }
+}
 
   
 Future<void> updateWallet(String userId, String newAmount) async {
