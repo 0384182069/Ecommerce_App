@@ -17,13 +17,13 @@ class RestApi {
     );
     request.files.add(myFile);
 
-    // Gửi request
+
     final response = await request.send();
     if (response.statusCode == 200) {
       var data = await response.stream.bytesToString();
       var jsonData = jsonDecode(data);
       print(jsonData);
-      return jsonData["data"]["url"];  // Lấy URL của ảnh từ response
+      return jsonData["data"]["url"];  
     } else {
       print("Upload failed with status: ${response.statusCode}");
       print("Response: ${await response.stream.bytesToString()}");

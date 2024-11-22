@@ -1,5 +1,6 @@
 import 'package:ecommerce_app/services/auth_service.dart';
 import 'package:ecommerce_app/services/cloud_store.dart';
+import 'package:ecommerce_app/views/login_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:ecommerce_app/utils/toast_helper.dart';
@@ -137,10 +138,10 @@ class AuthViewModel extends ChangeNotifier {
       Navigator.of(context).pop();
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const BottomNav()),
+        MaterialPageRoute(builder: (context) => const Login()),
       );
-
       ToastHelper.showToast("Register Successfully!", Colors.green);
+      
     } on FirebaseAuthException catch (e) {
       Navigator.of(context).pop();
       handleRegisterError(e, context);

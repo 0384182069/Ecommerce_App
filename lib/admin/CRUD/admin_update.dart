@@ -262,14 +262,14 @@ class _AdminUpdateState extends State<AdminUpdate> {
                       elevation: 5,
                       borderRadius: BorderRadius.circular(20),
                       child: Container(
-                        width: 200,
-                        height: 50,
+                        width: MediaQuery.of(context).size.width/2,
+                        padding: const EdgeInsets.symmetric(vertical: 15),
                         decoration: BoxDecoration(
                           color: Colors.black,
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: Center(
-                          child: Text("Update Food", style: TextHelper.headerTextStyle(context)),
+                          child: Text("Update", style: TextHelper.headerTextStyle(context).copyWith(color: Colors.white)),
                         ),
                       ),
                     ),
